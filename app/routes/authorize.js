@@ -7,7 +7,7 @@ export default Route.extend({
 
 	async beforeModel() {
 		await this.get('auth').handleAuthentication();
-		let route = this.get('auth.isAuthenticated') ? 'index' : 'welcome';
+		let route = this.get('auth.isAuthenticated') ? 'main' : 'welcome';
 		this.transitionTo(route);
 	}
 

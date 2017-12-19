@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
 		},
 
 		enterSite() {
-			this.transitionToRoute('index');
+			this.transitionToRoute('main');
 		}
 	}
 });

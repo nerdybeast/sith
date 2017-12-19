@@ -5,7 +5,7 @@ export default ApplicationAdapter.extend({
 	namespace: 'api/org',
 	
 	//"type" param here will be "org-version"
-	pathForType(type) {
+	pathForType(/*type*/) {
 		
 		//This will give us a url of ".../api/org/versions".
 		return 'versions';
