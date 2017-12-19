@@ -7,8 +7,11 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('welcome', { path: '/welcome' });
+  this.route('welcome');
   this.route('authorize');
+  this.route('index', { path: '/' }, function() {
+    this.route('test-runner');
+  });
 });
 
 export default Router;
