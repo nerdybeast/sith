@@ -1,10 +1,17 @@
 import Ember from 'ember';
-import { debug } from '@ember/debug';
 
 export default Ember.Controller.extend({
+
+	auth: Ember.inject.service('auth'),
+
 	actions: {
+		
 		login() {
-			debug('logged in');
+			this.get('auth').login();
+		},
+
+		enterSite() {
+			this.transitionToRoute('index');
 		}
 	}
 });

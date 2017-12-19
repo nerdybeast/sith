@@ -18,6 +18,12 @@ You will need the following things properly installed on your computer.
 * `cd sith`
 * `npm install`
 
+## Setup
+
+Create a `.env` file in the root of the project. This will need to contain several key/value pairs that are used to configure the app.
+
+> See `config/dotenv.js` for all the key names
+
 ## Running / Development
 
 * `ember serve`
