@@ -101,5 +101,24 @@ export default Service.extend({
 
 		this.setProfile(profile);
 		return profile;
-	}
+	},
+
+	userInformation: Ember.computed(function() {
+		
+		const profile = JSON.parse(sessionStorage.getItem('profile'));
+		const customDomain = profile.urls.custom_domain;
+		const enterprise = profile.urls.enterprise;
+
+		const sessionId = profile.identities[0].access_token;
+		const instanceUrl = customDomain || enterprise.substring(0, enterprise.indexOf('/services'));
+		const organizationId = profile.organization_id;
+
+		return {
+			sessionId,
+			instanceUrl,
+			organizationId,
+			email: profile.email
+		};
+
+	}).volatile()
 });

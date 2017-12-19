@@ -1,2 +1,23 @@
-Auth'd!
-{{bulma-button onmousedown=(action "logout") label="Logout" isMedium=true isSuccess=true}}
+{{nav-bar user=auth.userInformation onLogout=(action "logout")}}
+
+<div class="columns">
+	<div class="column is-narrow">
+		<aside class="menu">
+			<ul class="menu-list">
+				<li>
+					{{#link-to "index"}}
+						<i class="fa fa-2x fa-tachometer" style="margin:5px;"></i>
+					{{/link-to}}
+				</li>
+				<li>
+					{{#link-to "index.test-runner"}}
+						<i class="fa fa-2x fa-list-alt" style="margin:5px;"></i>
+					{{/link-to}}
+				</li>
+			</ul>
+		</aside>
+	</div>
+	<div class="column">
+		{{outlet}}
+	</div>
+</div>
