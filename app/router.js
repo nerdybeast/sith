@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('authorize');
   this.route('main', { path: '/' }, function() {
     this.route('test-runner');
+    this.route('logging');
   });
 });
 

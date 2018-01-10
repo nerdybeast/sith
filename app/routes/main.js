@@ -7,7 +7,10 @@ export default Route.extend({
 	auth: Ember.inject.service('auth'),
 
 	beforeModel() {
-		if(!this.get('auth.isAuthenticated')) this.transitionTo('application');
+		if(!this.get('auth.isAuthenticated')) {
+			this.get('auth').logout();
+			this.transitionTo('welcome');
+		}
 	},
 
 	async model() {

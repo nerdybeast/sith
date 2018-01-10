@@ -51,7 +51,7 @@ export default Service.extend({
 
 	//Volatile property meaning the value won't be cached, fresh data pull every time.
 	isAuthenticated: Ember.computed(function() {
-		return Ember.isPresent(this.getSession().access_token) && this.isNotExpired();
+		return Ember.isPresent(this.getSession().access_token) && !this.isExpired();
 	}).volatile(),
 
 	getSession() {
@@ -78,10 +78,10 @@ export default Service.extend({
 		sessionStorage.removeItem('profile');
 	},
 	
-	isNotExpired() {
+	isExpired() {
 		// Check whether the current time is past the access token's expiry time
 		let expiresAt = this.getSession().expires_at;
-		return new Date().getTime() < expiresAt;
+		return new Date().getTime() >= expiresAt;
 	},
 
 	setProfile(profile) {
@@ -110,11 +110,13 @@ export default Service.extend({
 		const enterprise = profile.urls.enterprise;
 
 		const sessionId = profile.identities[0].access_token;
+		const userId = profile.identities[0].user_id;
 		const instanceUrl = customDomain || enterprise.substring(0, enterprise.indexOf('/services'));
 		const organizationId = profile.organization_id;
 
 		return {
 			sessionId,
+			userId,
 			instanceUrl,
 			organizationId,
 			email: profile.email

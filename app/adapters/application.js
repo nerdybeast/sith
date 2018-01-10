@@ -13,12 +13,13 @@ export default DS.JSONAPIAdapter.extend({
 	namespace: 'api',
 	headers: computed('auth.userInformation', function() {
 		
-		const { sessionId, instanceUrl, organizationId } = this.get('auth.userInformation');
+		const { sessionId, instanceUrl, organizationId, userId } = this.get('auth.userInformation');
 
 		return { 
 			'salesforce-session-token': sessionId,
 			'instance-url': instanceUrl,
-			'org-id': organizationId
+			'org-id': organizationId,
+			'user-id': userId
 		};
 	})
 });
