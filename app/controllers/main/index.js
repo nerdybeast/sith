@@ -50,6 +50,8 @@ export default Controller.extend({
 		},
 
 		async saveNewTraceFlag(traceFlag) {
+			const debugLevel = this.get('store').peekRecord('debug-level', traceFlag.get('debugLevelId'));
+			traceFlag.set('debugLevel', debugLevel);
 			await traceFlag.save();
 			this.updateTraceFlagsFromStore();
 		},

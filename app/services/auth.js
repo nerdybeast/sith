@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import Service from '@ember/service';
-import ENV from "sith/config/environment";
+import ENV from 'sith/config/environment';
 
 export default Service.extend({
 
