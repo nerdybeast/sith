@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import Route from '@ember/routing/route';
-import { hash } from 'rsvp';
+import { all } from 'rsvp';
 
 export default Route.extend({
 	
@@ -15,10 +15,16 @@ export default Route.extend({
 
 	async model() {
 
-		const profile = await this.get('auth').getProfile();
-		const orgVersions = await this.get('store').findAll('org-version');
+		//const profile = await this.get('auth').getProfile();
+		const store = this.get('store');
 
-		return hash({ profile, orgVersions});
+		const [ orgVersions, traceFlags, debugLevels ] = await all([
+			store.findAll('org-version'),
+			store.findAll('trace-flag'),
+			store.findAll('debug-level')
+		]);
+
+		return { /*profile,*/ orgVersions, traceFlags, debugLevels };
 	}
 	
 });

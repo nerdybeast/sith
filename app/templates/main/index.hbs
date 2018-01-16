@@ -1,10 +1,16 @@
-{{!-- <div class="field has-addons">
-	<div class="control">
-		<input class="input" type="text" placeholder="Find a repository">
-	</div>
-	<div class="control">
-		<a class="button">
-			Search
-		</a>
-	</div>
-</div> --}}
+<div>
+	<p>User Id: {{auth.userInformation.userId}}</p>
+	<p>Org Id: {{auth.userInformation.organizationId}}</p>
+	<p>Domain: {{auth.userInformation.instanceUrl}}</p>
+	<p>Session Id: {{auth.userInformation.sessionId}}</p>
+</div>
+{{trace-flags 
+	traceFlags=model.traceFlags 
+	debugLevels=model.debugLevels 
+	onNewTraceFlag=(action "createNewTraceFlag")
+	onSaveNewTraceFlag=(action "saveNewTraceFlag")
+	onUpdate=(action "updateTraceFlag") 
+	onDelete=(action "deleteTraceFlag") 
+	onCancel=(action "cancelModification")
+	onRefresh=(action "refreshTraceFlags")
+}}

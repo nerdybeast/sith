@@ -1,0 +1,76 @@
+<div class="panel">
+	<div class="panel-heading">
+		Trace Flags
+		<span class="is-pulled-right">
+			{{fa-icon icon="refresh" onClick=(action "refresh")}}
+		</span>
+	</div>
+	<div class="panel-block" style="padding:0px;">
+		<table class="table is-narrow is-fullwidth" style="margin-bottom:0px;">
+			<thead>
+				<th></th>
+				<th>Log Type</th>
+				<th>Debug Level</th>
+				<th>Start Date</th>
+				<th>End Date</th>
+				<th></th>
+			</thead>
+			<tbody>
+				{{#each traceFlags as |traceFlag|}}
+					{{#unless traceFlag.isNew}}
+					<tr>
+						<td class="is-narrow">
+							{{fa-icon
+								icon="times"
+								animationIcon="cog"
+								colorClass="danger"
+								animationColorClass="success"
+								onClick=(action "delete" traceFlag)
+							}}
+						</td>
+						<td>{{traceFlag.logType}}</td>
+						<td>{{traceFlag.debugLevel.developerName}}</td>
+						<td>{{moment-format traceFlag.startDate 'lll'}}</td>
+						<td>{{moment-format traceFlag.expirationDate 'lll'}}</td>
+						<td>
+							{{hour-button-group
+								class="is-pulled-right"
+								traceFlag=traceFlag
+								onClick=(action "updateExpiration")
+							}}
+						</td>
+					</tr>
+					{{/unless}}
+				{{/each}}
+				{{#if newTraceFlag}}
+					<tr>
+						<td>
+							{{fa-icon icon="times" class="has-text-danger" animateOnAction=false onClick=(action "cancel" newTraceFlag)}}
+						</td>
+						<td>{{newTraceFlag.logType}}</td>
+						<td>
+							{{#power-select selected=newDebugLevelName options=debugLevelOptions onchange=(action "setNewDebugLevelName") as |name|}}
+								{{name}}
+							{{/power-select}}
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							{{hour-button-group 
+								class="is-pulled-right"
+								traceFlag=newTraceFlag 
+								onClick=(action "saveNewTraceFlag")
+							}}
+						</td>
+					</tr>
+				{{else}}
+					<tr>
+						<td>
+							{{fa-icon icon="plus" colorClass="success" animateOnAction=false onClick=(action "add")}}
+						</td>
+					</tr>
+				{{/if}}
+			</tbody>
+		</table>
+	</div>
+</div>

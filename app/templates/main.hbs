@@ -1,6 +1,6 @@
 {{nav-bar user=auth.userInformation onLogout=(action "logout")}}
 
-<div class="columns">
+<div class="columns is-gapless">
 	<div class="column is-narrow">
 		<aside class="menu">
 			<ul class="menu-list">
@@ -23,6 +23,6 @@
 		</aside>
 	</div>
 	<div class="column">
-		{{outlet}}
+		<div>{{outlet}}</div>
 	</div>
 </div>

@@ -47,6 +47,9 @@ module.exports = function(defaults) {
 	// along with the exports of each module as its value.
 
 	app.import('node_modules/auth0-js/build/auth0.js');
+	
+	app.import('node_modules/toastr/build/toastr.min.css');
+	app.import('node_modules/toastr/build/toastr.min.js');
 
 	return app.toTree();
 };

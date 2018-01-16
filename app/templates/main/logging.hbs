@@ -1,1 +1,24 @@
-Logging
+<div class="columns is-gapless">
+	<div class="column is-narrow">
+		<aside class="menu">
+			<ul class="menu-list">
+				{{#each model.logs as |log|}}
+					<li>
+						<a {{action "fetchLogContent" log.id}} class={{if log.isActive "is-active"}}>
+							{{log.startTime}}
+						</a>
+					</li>
+				{{/each}}
+			</ul>
+		</aside>
+	</div>
+	<div>
+		{{#if fetchingLogContent}}
+			Fetching Log Contents...
+		{{else}}
+			{{#if activeApexLogRecord.body}}
+				<pre style="width:100vw;">{{activeApexLogRecord.body}}</pre>
+			{{/if}}
+		{{/if}}
+	</div>
+</div>
