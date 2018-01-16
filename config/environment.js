@@ -17,16 +17,14 @@ module.exports = function(environment) {
 			Date: false
 			}
 		},
-
 		APP: {
 			// Here you can pass flags/options to your application instance
 			// when it is created
+		},
+		'ember-websockets': {
+			socketIO: true
 		}
 	};
-
-	if(environment === 'localhost') {
-		ENV.domain = 'http://localhost:5000';
-	}
 
 	if (environment === 'development') {
 		// ENV.APP.LOG_RESOLVER = true;
@@ -34,9 +32,6 @@ module.exports = function(environment) {
 		// ENV.APP.LOG_TRANSITIONS = true;
 		// ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
 		// ENV.APP.LOG_VIEW_LOOKUPS = true;
-
-		//TODO: Fix this domain when the api is live...
-		ENV.domain = 'http://localhost:5000';
 	}
 
 	if (environment === 'test') {

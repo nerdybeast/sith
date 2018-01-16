@@ -95,7 +95,7 @@ export default Service.extend({
 
 		const token = this.getSession().id_token;
 
-		const profile = await this.get('ajax').post(`${ENV.domain}/api/user/profile`, {
+		const profile = await this.get('ajax').post(`${ENV.SITH_API_DOMAIN}/api/user/profile`, {
 			data: { token }
 		});
 

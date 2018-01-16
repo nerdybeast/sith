@@ -1,18 +1,36 @@
 import Component from '@ember/component';
-import { inject } from '@ember/service';
+import { inject as injectService } from '@ember/service';
 import { computed } from '@ember/object';
 import { debug } from '@ember/debug';
 import moment from 'moment';
+import ENV from 'sith/config/environment';
 
 export default Component.extend({
 
-	//Inject these services
-	toast: inject('toast'),
-	auth: inject('auth'),
+	toast: injectService('toast'),
+	auth: injectService('auth'),
+	io: injectService('socket-io'),
 
 	//Set on component creation
 	traceFlags: null,
 	debugLevels: null,
+
+	socket() {
+		return this.get('io').socketFor(`${ENV.SITH_API_DOMAIN}/trace-flag`);
+	},
+
+	init() {
+		this._super(...arguments);
+
+		const socket = this.socket();
+
+		socket.on('connect', this.onConnect, this);
+	},
+
+	onConnect() {
+		const socket = this.socket();
+		socket.emit('handshake', this.get('auth.userInformation'));
+	},
 
 	newDebugLevelName: null,
 

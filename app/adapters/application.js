@@ -9,7 +9,7 @@ import { computed } from '@ember/object';
  */
 export default DS.JSONAPIAdapter.extend({
 	auth: inject('auth'),
-	host: ENV.domain,
+	host: ENV.SITH_API_DOMAIN,
 	namespace: 'api',
 	headers: computed('auth.userInformation', function() {
 		

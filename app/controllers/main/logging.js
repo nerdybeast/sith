@@ -18,7 +18,7 @@ export default Controller.extend({
 
 		const { sessionId, instanceUrl, organizationId, userId } = this.get('auth.userInformation');
 
-		const apexLogBody = await this.get('ajax').post(`${ENV.domain}/api/sobjects/apex-log-body`, {
+		const apexLogBody = await this.get('ajax').post(`${ENV.SITH_API_DOMAIN}/api/sobjects/apex-log-body`, {
 			headers: {
 				'salesforce-session-token': sessionId,
 				'instance-url': instanceUrl,
