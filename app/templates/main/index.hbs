@@ -1,16 +1,19 @@
-<div>
-	<p>User Id: {{auth.userInformation.userId}}</p>
-	<p>Org Id: {{auth.userInformation.organizationId}}</p>
-	<p>Domain: {{auth.userInformation.instanceUrl}}</p>
-	<p>Session Id: {{auth.userInformation.sessionId}}</p>
+<div class="main-container">
+	<div class="columns is-desktop is-multiline">
+		<div class="column is-12-mobile is-12-tablet is-12-desktop is-12-widescreen is-5-fullhd">
+			{{user-information user=auth.userInformation}}
+		</div>
+		<div class="column">
+			{{trace-flags 
+				traceFlags=model.traceFlags 
+				debugLevels=model.debugLevels 
+				onNewTraceFlag=(action "createNewTraceFlag")
+				onSaveNewTraceFlag=(action "saveNewTraceFlag")
+				onUpdate=(action "updateTraceFlag") 
+				onDelete=(action "deleteTraceFlag") 
+				onCancel=(action "cancelModification")
+				onRefresh=(action "refreshTraceFlags")
+			}}
+		</div>
+	</div>
 </div>
-{{trace-flags 
-	traceFlags=model.traceFlags 
-	debugLevels=model.debugLevels 
-	onNewTraceFlag=(action "createNewTraceFlag")
-	onSaveNewTraceFlag=(action "saveNewTraceFlag")
-	onUpdate=(action "updateTraceFlag") 
-	onDelete=(action "deleteTraceFlag") 
-	onCancel=(action "cancelModification")
-	onRefresh=(action "refreshTraceFlags")
-}}

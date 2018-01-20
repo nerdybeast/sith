@@ -17,12 +17,13 @@
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
-    "bulma": "^0.5.3",
+    "bulma": "^0.6.2",
     "ember-ajax": "^3.0.0",
     "ember-bulma": "^0.4.1",
     "ember-cli": "~2.17.0",
     "ember-cli-app-version": "^3.0.0",
     "ember-cli-babel": "^6.6.0",
+    "ember-cli-clipboard": "^0.8.1",
     "ember-cli-dependency-checker": "^2.0.0",
     "ember-cli-dotenv": "^2.0.0",
     "ember-cli-eslint": "^4.2.1",
@@ -52,7 +53,9 @@
   },
   "dependencies": {
     "auth0-js": "^8.12.1",
-    "bulmaswatch": "0.5.2",
+    "bulmaswatch": "^0.5.2",
+    "simplebar": "^2.5.1",
+    "tippy.js": "^2.0.9",
     "toastr": "^2.1.4"
   }
 }

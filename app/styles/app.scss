@@ -5,7 +5,46 @@
 
 @import "ember-power-select";
 
+$darkerBackground: darken($background, 12%);
+
+//https://stackoverflow.com/questions/13274599/sass-calculate-percent-minus-px for this crazy calculation
+//$navbar-height is in rem units which sass throws an error that "vh" and "rem" are incompatible but converting 
+//the rem value to a string works for some reason...
+$fullPageHeight: calc(100vh - #{$navbar-height});
+
+.main-container {
+	//column-gap only applies to 1 side of a column so to get the "full" gap we need to double this value.
+	//This gives a padding that matches the gap seen between the columns.
+	//https://bulma.io/documentation/columns/gap/
+	padding: $column-gap * 2;
+}
+
+.full-page-height {
+	height: $fullPageHeight;
+}
+
+.darker-background {
+	background-color: $darkerBackground;
+}
+
 .clickable {
 	cursor: pointer;
 }
 
+// Extending the default font awesome animation class
+.fa-spin-2x {
+	-webkit-animation: fa-spin 1s infinite linear;
+	animation: fa-spin 1s infinite linear;
+}
+
+.tippy-tooltip.bulma-theme {
+	background-color: $black;
+}
+
+.tippy-tooltip.bulma-theme .tippy-arrow {
+	border-top: 7px solid $black;
+	// border-right: 7px solid transparent;
+	// border-left: 7px solid transparent;
+	// bottom: -7px;
+	// margin: 0 7px;
+}

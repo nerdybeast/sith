@@ -17,7 +17,10 @@ export default Route.extend({
 
 		this._super(controller, model);
 
-		controller.set('model.logs', model.logs.sortBy('startTime').reverseObjects());
+		const sortedLogs = model.logs.sortBy('startTime').reverseObjects();
+		sortedLogs[0].set('isActive', true);
+		
+		controller.set('model.logs', sortedLogs);
 	},
 
 	actions: {

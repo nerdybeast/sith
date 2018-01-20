@@ -29,10 +29,17 @@
 
 <div class="modal {{if showLogoutModal 'is-active'}}">
 	<div class="modal-background"></div>
-	<div class="modal-content">
-		<p>Are you sure you want to logout?</p>
-		{{bulma-button label="Logout" isSuccess=true onmousedown=(action "logout")}}
-		{{bulma-button label="Cancel" isDanger=true onmousedown=(action "cancelLogout")}}
+	<div class="modal-card">
+		<header class="modal-card-header">
+			<p class="modal-card-title">Logout</p>
+			<button class="delete" {{action "cancelLogout"}}></button>
+		</header>
+		<section class="modal-card-body">
+			<p>Are you sure you want to logout?</p>
+		</section>
+		<footer class="modal-card-foot">
+			{{bulma-button label="Logout" isSuccess=true onmousedown=(action "logout")}}
+			{{bulma-button label="Cancel" isDanger=true onmousedown=(action "cancelLogout")}}
+		</footer>
 	</div>
-	<button class="modal-close is-large" {{action "cancelLogout"}}></button>
 </div>

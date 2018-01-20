@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import Service from '@ember/service';
 import ENV from 'sith/config/environment';
+import auth0 from 'auth0';
 
 export default Service.extend({
 

@@ -9,13 +9,14 @@ export default Component.extend({
 	animationIcon: null,
 	colorClass: null,
 	animationColorClass: null,
+	animationSpeedClass: 'fa-spin',
 
 	tagName: 'span',
 	classNames: ['icon'],
 	
 	classNameBindings: [
 		'isClickable:clickable',
-		'shouldAnimate:fa-spin',
+		'shouldAnimate',
 		'colorClassToDisplay'
 	],
 
@@ -38,7 +39,8 @@ export default Component.extend({
 	}),
 
 	shouldAnimate: computed('animateOnAction', 'clickTriggered', function() {
-		return this.get('animateOnAction') && this.get('clickTriggered');
+		const isAnimated = this.get('animateOnAction') && this.get('clickTriggered');
+		return isAnimated ? this.get('animationSpeedClass') : '';
 	}),
 
 	//Default component event handler: https://guides.emberjs.com/v2.18.0/components/handling-events/#toc_event-names

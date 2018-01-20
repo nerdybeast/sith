@@ -1,8 +1,8 @@
 import Service from '@ember/service';
-//import { computed } from '@ember/object';
+import toastr from 'toastr';
 
-const toast = (name) => {
-	return (msg = '', title = '', options = {}) => {
+const toast = (name, defaultOptions = {}) => {
+	return (msg = '', title = '', options = defaultOptions) => {
 		return toastr[name](msg, title, options);
 	}
 }
@@ -11,8 +11,14 @@ export default Service.extend({
 
 	success: toast('success'),
 	info: toast('info'),
-	warning: toast('warning'),
-	error: toast('error'),
+	
+	warning: toast('warning', {
+		timeOut: 5000
+	}),
+	
+	error: toast('error', {
+		timeOut: 5000
+	}),
 
 	init() {
 		this._super(...arguments);

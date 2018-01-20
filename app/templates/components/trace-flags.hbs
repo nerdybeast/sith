@@ -2,18 +2,17 @@
 	<div class="panel-heading">
 		Trace Flags
 		<span class="is-pulled-right">
-			{{fa-icon icon="refresh" onClick=(action "refresh")}}
+			{{fa-icon icon="refresh" animationSpeedClass="fa-spin-2x" onClick=(action "refresh")}}
 		</span>
 	</div>
-	<div class="panel-block" style="padding:0px;">
+	<div class="panel-block is-paddingless">
 		<table class="table is-narrow is-fullwidth" style="margin-bottom:0px;">
 			<thead>
 				<th></th>
 				<th>Log Type</th>
 				<th>Debug Level</th>
-				<th>Start Date</th>
-				<th>End Date</th>
-				<th></th>
+				<th>Expiration</th>
+				<th>Add Debug Time</th>
 			</thead>
 			<tbody>
 				{{#each traceFlags as |traceFlag|}}
@@ -28,13 +27,23 @@
 								onClick=(action "delete" traceFlag)
 							}}
 						</td>
-						<td>{{traceFlag.logType}}</td>
-						<td>{{traceFlag.debugLevel.developerName}}</td>
-						<td>{{moment-format traceFlag.startDate 'lll'}}</td>
-						<td>{{moment-format traceFlag.expirationDate 'lll'}}</td>
+						<td>
+							<span class={{if traceFlag.isExpired "is-italic"}}>
+								{{traceFlag.logType}}
+							</span>
+						</td>
+						<td>
+							<span class={{if traceFlag.isExpired "is-italic"}}>
+								{{traceFlag.debugLevel.developerName}}
+							</span>
+						</td>
+						<td>
+							<span class={{if traceFlag.isExpired "is-italic"}}>
+								{{moment-from-now traceFlag.expirationDate interval=1000}}
+							</span>
+						</td>
 						<td>
 							{{hour-button-group
-								class="is-pulled-right"
 								traceFlag=traceFlag
 								onClick=(action "updateExpiration")
 							}}
@@ -54,10 +63,8 @@
 							{{/power-select}}
 						</td>
 						<td></td>
-						<td></td>
 						<td>
 							{{hour-button-group 
-								class="is-pulled-right"
 								traceFlag=newTraceFlag 
 								onClick=(action "saveNewTraceFlag")
 							}}

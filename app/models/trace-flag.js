@@ -14,5 +14,6 @@ export default DS.Model.extend({
 	tracedEntityId: DS.attr('string'),
 	validation: DS.attr('string'),
 	visualforce: DS.attr('string'),
-	workflow: DS.attr('string')
+	workflow: DS.attr('string'),
+	isExpired: false
 });

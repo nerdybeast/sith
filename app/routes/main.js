@@ -15,7 +15,6 @@ export default Route.extend({
 
 	async model() {
 
-		//const profile = await this.get('auth').getProfile();
 		const store = this.get('store');
 
 		const [ orgVersions, traceFlags, debugLevels ] = await all([
@@ -24,7 +23,6 @@ export default Route.extend({
 			store.findAll('debug-level')
 		]);
 
-		return { /*profile,*/ orgVersions, traceFlags, debugLevels };
+		return { orgVersions, traceFlags, debugLevels };
 	}
-	
 });

@@ -1,0 +1,21 @@
+<label class="label">{{inputLabel}}</label>
+<div class="field has-addons">
+	<div class="control is-expanded">
+		{{input type="text" class="input" value=inputValue readonly=true}}
+	</div>
+	<div class="control">
+		{{#copy-button 
+			class="button" 
+			title="copy to clipboard"
+			clipboardText=inputValue 
+			success=(action onCopy inputLabel) 
+			error=(action onCopyError inputLabel)
+		}}
+			<span class="icon">
+				<i class="fa fa-clipboard"></i>
+			</span>
+		{{/copy-button}}
+	</div>
+</div>
+
+{{yield}}

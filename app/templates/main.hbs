@@ -2,7 +2,7 @@
 
 <div class="columns is-gapless">
 	<div class="column is-narrow">
-		<aside class="menu">
+		<aside id="left-nav" class="menu full-page-height darker-background">
 			<ul class="menu-list">
 				<li>
 					{{#link-to "main"}}
@@ -23,6 +23,6 @@
 		</aside>
 	</div>
 	<div class="column">
-		<div>{{outlet}}</div>
+		{{outlet}}
 	</div>
 </div>

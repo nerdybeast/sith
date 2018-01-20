@@ -2,6 +2,7 @@ import Ember from 'ember';
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import ENV from 'sith/config/environment';
+import { debug } from '@ember/debug';
 
 export default Controller.extend({
 
@@ -14,64 +15,72 @@ export default Controller.extend({
 		return this.get('model.logs').find(log => log.get('isActive'));
 	}),
 
-	async getApexLogBody(apexLogId, apiVersion) {
+	// async getApexLogBody(apexLogId, apiVersion) {
 
-		const { sessionId, instanceUrl, organizationId, userId } = this.get('auth.userInformation');
+	// 	const { sessionId, instanceUrl, organizationId, userId } = this.get('auth.userInformation');
 
-		const apexLogBody = await this.get('ajax').post(`${ENV.SITH_API_DOMAIN}/api/sobjects/apex-log-body`, {
-			headers: {
-				'salesforce-session-token': sessionId,
-				'instance-url': instanceUrl,
-				'org-id': organizationId,
-				'user-id': userId
-			},
-			data: {
-				apexLogId,
-				apiVersion
-			},
-			dataType: 'text'
-		});
+	// 	const apexLogBody = await this.get('ajax').post(`${ENV.SITH_API_DOMAIN}/api/sobjects/apex-log-body`, {
+	// 		headers: {
+	// 			'salesforce-session-token': sessionId,
+	// 			'instance-url': instanceUrl,
+	// 			'org-id': organizationId,
+	// 			'user-id': userId
+	// 		},
+	// 		data: {
+	// 			apexLogId,
+	// 			apiVersion
+	// 		},
+	// 		dataType: 'text'
+	// 	});
 
-		return apexLogBody;
-	},
+	// 	return apexLogBody;
+	// },
 
 	actions: {
 
-		async fetchLogContent(apexLogId) {
+		setActiveLog(apexLogId) {
 
-			if(this.get('fetchingLogContent')) return;
-
-			//const store = this.get('store');
-			//const apexLog = store.peekRecord('apex-log', apexLogId);
 			const apexLog = this.get('model.logs').find(log => log.get('id') === apexLogId);
 
 			this.get('model.logs').forEach(log => log.set('isActive', false));
 			apexLog.set('isActive', true);
+		},
 
-			if(!apexLog.get('body')) {
+		// async fetchLogContent(apexLogId) {
 
-				this.set('fetchingLogContent', true);
+		// 	if(this.get('fetchingLogContent')) return;
 
-				//TODO: Consider if we need to allow the user to specify a different api version for this call.
-				const latestOrgVersion = this.get('store').peekAll('org-version').sortBy('id').get('lastObject');
+		// 	//const store = this.get('store');
+		// 	//const apexLog = store.peekRecord('apex-log', apexLogId);
+		// 	const apexLog = this.get('model.logs').find(log => log.get('id') === apexLogId);
 
-				let apexLogBody;
+		// 	this.get('model.logs').forEach(log => log.set('isActive', false));
+		// 	apexLog.set('isActive', true);
 
-				try {
+		// 	if(!apexLog.get('body')) {
 
-					apexLogBody = await this.getApexLogBody(apexLogId, latestOrgVersion.get('id'));
+		// 		this.set('fetchingLogContent', true);
 
-				} catch(error) {
+		// 		//TODO: Consider if we need to allow the user to specify a different api version for this call.
+		// 		const latestOrgVersion = this.get('store').peekAll('org-version').sortBy('id').get('lastObject');
 
-					console.error(error);
+		// 		let apexLogBody;
 
-				}
+		// 		try {
 
-				apexLog.set('body', apexLogBody);
-			}
+		// 			apexLogBody = await this.getApexLogBody(apexLogId, latestOrgVersion.get('id'));
 
-			this.set('fetchingLogContent', false);
-		}
+		// 		} catch(error) {
+
+		// 			debug(error);
+
+		// 		}
+
+		// 		apexLog.set('body', apexLogBody);
+		// 	}
+
+		// 	this.set('fetchingLogContent', false);
+		// }
 
 	}
 

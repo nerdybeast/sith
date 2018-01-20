@@ -1,0 +1,28 @@
+<div class="panel">
+	<div class="panel-heading">
+		User Information
+	</div>
+	<div class="panel-block">
+		{{!-- Need this extra div to force our columns here to fill 100% of the "panel-block" --}}
+		<div style="width:100%">
+			<div class="columns is-desktop is-multiline">
+				<div class="column is-half-desktop is-half-fullhd is-half-widescreen">
+					{{user-information-input inputLabel="User Id" inputValue=user.userId onCopy=(action "onCopy") onCopyError=(action "onCopyError")}}
+				</div>
+				<div class="column is-half-desktop is-half-fullhd is-half-widescreen">
+					{{user-information-input inputLabel="Org Id" inputValue=user.organizationId onCopy=(action "onCopy") onCopyError=(action "onCopyError")}}
+				</div>
+				<div class="column is-full-fullhd is-half-desktop is-half-widescreen">
+					{{user-information-input inputLabel="Instance Url" inputValue=user.instanceUrl onCopy=(action "onCopy") onCopyError=(action "onCopyError")}}
+				</div>
+				<div class="column">
+					{{user-information-input inputLabel="Session Id" inputValue=user.sessionId onCopy=(action "onCopy") onCopyError=(action "onCopyError")}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+{{yield}}
