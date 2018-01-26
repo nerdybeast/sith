@@ -3,6 +3,11 @@
 @import "bulma";
 @import "_overrides";
 
+//It may be due to the color scheme of the dark theme we are using but the text in the ember-power-select
+//was too light to see clearly. Here we are darkening it a little bit.
+//See: https://github.com/cibernox/ember-power-select/blob/master/app/styles/ember-power-select/variables.scss
+//"$black-ter" is defined here: https://bulma.io/documentation/overview/variables/
+$ember-power-select-text-color: $black-ter;
 @import "ember-power-select";
 
 $darkerBackground: darken($background, 12%);
@@ -47,4 +52,12 @@ $fullPageHeight: calc(100vh - #{$navbar-height});
 	// border-left: 7px solid transparent;
 	// bottom: -7px;
 	// margin: 0 7px;
+}
+
+//For inputs that are disabled but still want the user to interact with, for example being able
+//to manually use their mouse to copy the data from the input field. Bulma throws a "cursor: not-allowed"
+//on disbaled inputs but that doesn't look very user friendly.
+.input[disabled].interactable {
+	cursor: text;
+	border-color: $border;
 }

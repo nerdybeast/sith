@@ -26,6 +26,11 @@ export default Controller.extend({
 				const remoteTraceFlags = await store.query('trace-flag', {});
 
 				localTraceFlags.forEach(localTraceFlag => {
+					
+					//Prevents deleting a new trace flag the user is creating from the store if they happen to refresh trace flags in the middle of creating a new one.
+					if(localTraceFlag.get('isNew')) return;
+					
+					//True if we have a trace flag locally that is no longer in Salesforce.
 					if(!remoteTraceFlags.any(remoteTraceFlag => remoteTraceFlag.get('id') === localTraceFlag.get('id'))) {
 						store.unloadRecord(localTraceFlag);
 					}
