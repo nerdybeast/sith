@@ -1,7 +1,7 @@
-<div id="LogBodyWrapper" class="full-page-height">
-	<pre>
-		{{apexLog.body}}
-	</pre>
+<div id="ApexLogBodyWrapper" class="full-page-height">
+	{{#if apexLog.body}}
+		<pre>{{apexLog.body}}</pre>
+	{{/if}}
 </div>
 
 {{yield}}

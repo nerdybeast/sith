@@ -22,7 +22,7 @@ export default DS.JSONAPIAdapter.extend({
 		return { 
 			'salesforce-session-token': sessionId,
 			'instance-url': instanceUrl,
-			'org-id': organizationId,
+			'organization-id': organizationId,
 			'user-id': userId,
 			'org-version': orgVersion
 		};

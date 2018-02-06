@@ -1,8 +1,14 @@
 <div class="columns is-gapless">
-	<div class="column is-narrow">
-		{{apex-log-menu apexLogs=model.logs onClick=(action "setActiveLog")}}
-	</div>
-	<div class="column">
-		{{apex-log-body apexLog=activeApexLogRecord}}
-	</div>
+	{{#if model.logs}}
+		<div class="column is-narrow">
+			{{apex-log-menu apexLogs=model.logs onClick=(action "setActiveLog")}}
+		</div>
+		<div class="column">
+			{{apex-log-body apexLog=activeApexLogRecord}}
+		</div>
+	{{else}}
+		<div class="main-container">
+			No debug logs found
+		</div>
+	{{/if}}
 </div>

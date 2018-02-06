@@ -3,38 +3,44 @@ import { inject as injectService } from '@ember/service';
 import { computed } from '@ember/object';
 import { debug } from '@ember/debug';
 import moment from 'moment';
-// import ENV from 'sith/config/environment';
+import ENV from 'sith/config/environment';
 
 export default Component.extend({
 
 	toast: injectService('toast'),
 	auth: injectService('auth'),
-	//io: injectService('socket-io'),
+	io: injectService('socket-io'),
 
 	//Set on component creation
 	traceFlags: null,
 	debugLevels: null,
 
-	// socket() {
-	// 	return this.get('io').socketFor(`${ENV.SITH_API_DOMAIN}/trace-flag`);
-	// },
+	socket() {
+		return this.get('io').socketFor(`${ENV.SITH_API_DOMAIN}/trace-flags`);
+	},
+
+	isConnected: computed('socket.socket.connected', function() {
+		return this.get('socket.socket.connected');
+	}),
 
 	init() {
 
 		this._super(...arguments);
 
-		// 	const socket = this.socket();
+		const socket = this.socket();
 
-		// 	socket.on('connect', this.onConnect, this);
-		// },
-
-		// onConnect() {
-		// 	const socket = this.socket();
-		// 	socket.emit('handshake', this.get('auth.userInformation'));
+		socket.on('connect', this.onConnect, this);
+		socket.on('trace-flags-update', this.traceFlagsUpdate, this);
 	},
 
-	willDestroyElement() {
-		
+	onConnect() {
+		const socket = this.socket();
+		socket.emit('handshake', this.get('auth.userInformation'));
+	},
+
+	traceFlagsUpdate(traceFlags) {
+		this.get('onSocketUpdate')(traceFlags);
+		this.get('toast').info('Trace Flags synced with Salesforce');
 	},
 
 	newDebugLevelName: null,

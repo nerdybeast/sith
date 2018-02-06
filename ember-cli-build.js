@@ -66,7 +66,7 @@ module.exports = function(defaults) {
 
 	app.import('node_modules/simplebar/dist/simplebar.js');
 	app.import('node_modules/simplebar/dist/simplebar.css');
-	app.import('vendor/shims/simple-bar.js');
+	app.import('vendor/shims/simplebar.js');
 
 	return app.toTree();
 };

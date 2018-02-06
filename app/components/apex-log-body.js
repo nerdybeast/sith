@@ -1,12 +1,12 @@
 import Component from '@ember/component';
-import SimpleBar from 'simple-bar';
+// import SimpleBar from 'simplebar';
 //import { observer } from '@ember/object';
 
 export default Component.extend({
 
 	didInsertElement() {
-		const scrollbar = new SimpleBar(document.getElementById('LogBodyWrapper'));
-		this.set('scrollbar', scrollbar);
+		// const scrollbar = new SimpleBar(document.getElementById('body'));
+		// this.set('scrollbar', scrollbar);
 	}
 
 });

@@ -24,5 +24,19 @@ export default Route.extend({
 		]);
 
 		return { orgVersions, traceFlags, debugLevels };
+	},
+
+	actions: {
+
+		error(error) {
+			
+			const mainError = error.errors[0];
+
+			if(mainError.statusCode === 401) {
+				this.get('auth').logout();
+				this.replaceWith('welcome');
+			}
+		}
+
 	}
 });

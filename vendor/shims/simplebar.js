@@ -15,5 +15,5 @@
     };
   }
 
-  define('simple-bar', [], vendorModule);
+  define('simplebar', [], vendorModule);
 })();

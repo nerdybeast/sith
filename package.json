@@ -12,7 +12,7 @@
   "repository": "",
   "scripts": {
     "build": "ember build",
-    "start": "ember serve",
+    "start": "node --inspect=9229 node_modules/ember-cli/bin/ember serve",
     "test": "ember test"
   },
   "devDependencies": {

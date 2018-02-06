@@ -61,3 +61,34 @@ $fullPageHeight: calc(100vh - #{$navbar-height});
 	cursor: text;
 	border-color: $border;
 }
+
+//Current width is 66px;
+.left-nav {
+	position: fixed;
+	height: 100%;
+	a {
+		padding: 8px 12px;
+		i {
+			margin: 5px;
+		}
+	}
+}
+
+//To offset the width of the left nav
+.main-content {
+	margin-left:66px;
+}
+
+#ApexLogMenu {
+	position: fixed;
+	height: 100%;
+	width: 225px;
+}
+
+#ApexLogBodyWrapper {
+	margin-left: 225px;
+	max-width: calc(100vw - 291px); //minus left nav and apex log menu
+	pre {
+		height: 100%;
+	}
+}

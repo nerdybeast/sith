@@ -10,6 +10,24 @@ export default Controller.extend({
 		this.get('mainController').set('model.traceFlags', this.get('store').peekAll('trace-flag'));
 	},
 
+	purgeTraceFlagsNoLongerInSalesforce(remoteTraceFlags) {
+
+		const store = this.get('store');
+
+		//Filter by "isNew" to prevent deleting a new trace flag the user is currently creating.
+		const localTraceFlags = store.peekAll('trace-flag').filterBy('isNew', false);
+
+		localTraceFlags.forEach(localTraceFlag => {
+			
+			//True if we have a trace flag locally that is no longer in Salesforce.
+			if(!remoteTraceFlags.any(remoteTraceFlag => remoteTraceFlag.get('id') === localTraceFlag.get('id'))) {
+				store.unloadRecord(localTraceFlag);
+			}
+		});
+
+		this.updateTraceFlagsFromStore();
+	},
+
 	actions: {
 		
 		async refreshTraceFlags() {
@@ -18,25 +36,12 @@ export default Controller.extend({
 			
 				const store = this.get('store');
 
-				const localTraceFlags = store.peekAll('trace-flag');
-
 				//Using "query" instead of "findAll" because findAll returns a mix of what was returned from the server as well as 
 				//what's still stored locally in ember data. Here we need to know exactly what came back from the server so that we 
 				//can delete records from ember data that are no longer in Salesforce.
 				const remoteTraceFlags = await store.query('trace-flag', {});
 
-				localTraceFlags.forEach(localTraceFlag => {
-					
-					//Prevents deleting a new trace flag the user is creating from the store if they happen to refresh trace flags in the middle of creating a new one.
-					if(localTraceFlag.get('isNew')) return;
-					
-					//True if we have a trace flag locally that is no longer in Salesforce.
-					if(!remoteTraceFlags.any(remoteTraceFlag => remoteTraceFlag.get('id') === localTraceFlag.get('id'))) {
-						store.unloadRecord(localTraceFlag);
-					}
-				});
-
-				this.updateTraceFlagsFromStore();
+				this.purgeTraceFlagsNoLongerInSalesforce(remoteTraceFlags);
 
 			} catch (error) {
 				return error;
@@ -64,6 +69,25 @@ export default Controller.extend({
 		async updateTraceFlag(traceFlag) {
 			await traceFlag.save();
 			this.updateTraceFlagsFromStore();
+		},
+
+		updateTraceFlagsFromSocket(traceFlags) {
+			
+			const remoteTraceFlagIds = traceFlags.data.map(x => x.id);
+
+			if(remoteTraceFlagIds.length === 0) {
+				this.purgeTraceFlagsNoLongerInSalesforce([]);
+				return;
+			}
+
+			const store = this.get('store');
+			store.push(traceFlags);
+
+			const traceFlagsInSalesforce = store.peekAll('trace-flag').filter(x => {
+				return remoteTraceFlagIds.includes(x.get('id'));
+			});
+
+			this.purgeTraceFlagsNoLongerInSalesforce(traceFlagsInSalesforce);
 		},
 
 		async deleteTraceFlag(traceFlag) {
