@@ -2,10 +2,12 @@ import Ember from 'ember';
 import Service from '@ember/service';
 import ENV from 'sith/config/environment';
 import auth0 from 'auth0';
+import { inject as service } from '@ember/service';
 
 export default Service.extend({
 
-	ajax: Ember.inject.service('ajax'),
+	ajax: service('ajax'),
+	store: service('store'),
 
 	auth0: Ember.computed(function() {
 		
@@ -114,13 +116,15 @@ export default Service.extend({
 		const userId = profile.identities[0].user_id;
 		const instanceUrl = customDomain || enterprise.substring(0, enterprise.indexOf('/services'));
 		const organizationId = profile.organization_id;
+		const orgVersion = this.get('store').peekAll('org-version').sortBy('id').get('lastObject.version');
 
 		return {
 			sessionId,
 			userId,
 			instanceUrl,
 			organizationId,
-			email: profile.email
+			email: profile.email,
+			orgVersion
 		};
 
 	}).volatile()

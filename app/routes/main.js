@@ -1,10 +1,11 @@
-import Ember from 'ember';
 import Route from '@ember/routing/route';
 import { all } from 'rsvp';
+import { inject as service } from '@ember/service';
 
 export default Route.extend({
 	
-	auth: Ember.inject.service('auth'),
+	auth: service('auth'),
+	basicAjax: service('basic-ajax'),
 
 	beforeModel() {
 		if(!this.get('auth.isAuthenticated')) {
@@ -16,14 +17,16 @@ export default Route.extend({
 	async model() {
 
 		const store = this.get('store');
+		const basicAjax = this.get('basicAjax');
 
-		const [ orgVersions, traceFlags, debugLevels ] = await all([
+		const [ orgVersions, traceFlags, debugLevels, logLevels ] = await all([
 			store.findAll('org-version'),
 			store.findAll('trace-flag'),
-			store.findAll('debug-level')
+			store.findAll('debug-level'),
+			basicAjax.getLogTypes()
 		]);
 
-		return { orgVersions, traceFlags, debugLevels };
+		return { orgVersions, traceFlags, debugLevels, logLevels };
 	},
 
 	actions: {

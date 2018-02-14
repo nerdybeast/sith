@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 import ENV from 'sith/config/environment';
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 
 /**
@@ -8,8 +8,8 @@ import { computed } from '@ember/object';
  * This defaults requests to use "http://our-domain/api"
  */
 export default DS.JSONAPIAdapter.extend({
-	auth: inject('auth'),
-	store: inject('store'),
+	auth: service('auth'),
+	store: service('store'),
 	host: ENV.SITH_API_DOMAIN,
 	namespace: 'api',
 	headers: computed('auth.userInformation', function() {

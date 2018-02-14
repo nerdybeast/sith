@@ -46,6 +46,23 @@ export default Controller.extend({
 			apexLog.set('isActive', true);
 		},
 
+		updateApexLogsFromSocket(rawApexLogResponse) {
+
+			const store = this.get('store');
+			const localLogs = store.peekAll('apex-log').filter(log => !log.get('isActive'));
+
+			const remoteLogIds = rawApexLogResponse.data.map(x => x.id);
+
+			localLogs.forEach(log => {
+				if(!remoteLogIds.any(remoteLogId => remoteLogId === log.get('id'))) {
+					store.unloadRecord(log);
+				}
+			});
+
+			const apexLogs = this.get('store').push(rawApexLogResponse);
+			this.set('model.logs', apexLogs);
+		}
+
 		// async fetchLogContent(apexLogId) {
 
 		// 	if(this.get('fetchingLogContent')) return;

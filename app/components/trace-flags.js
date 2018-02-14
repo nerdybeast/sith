@@ -57,6 +57,21 @@ export default Component.extend({
 
 	debugLevelOptions: computed.mapBy('debugLevels', 'developerName'),
 
+	actionErrorNotifier(title, error) {
+
+		const toast = this.get('toast');
+
+		//if "error" is an ember data adapter error (ex: 401 returned from the server) then it will
+		//have a property "errors" that is an array of errors, if not default to whatever "error" currently is.
+		const errors = error.errors || [{ error }];
+
+		errors.forEach(x => toast.error(x.message, title));
+
+		if(errors.find(x => x.statusCode === 401)) {
+			this.sendAction('logout');
+		}
+	},
+
 	actions: {
 		
 		async refresh() {
@@ -80,12 +95,13 @@ export default Component.extend({
 				});
 
 				await this.get('onUpdate')(traceFlag);
-				toast.success('trace flag updated');
+				toast.success('Trace Flag Updated');
 
 			} catch (error) {
 				debug(`updateExpiration() error => ${error}`);
 				traceFlag.rollbackAttributes();
-				toast.error(error, 'Error Updating Trace Flag');
+
+				this.actionErrorNotifier('Error Updating Trace Flag', error);
 			}
 		},
 
@@ -106,10 +122,10 @@ export default Component.extend({
 				});
 	
 				await this.get('onSaveNewTraceFlag')(traceFlag);
-				toast.success('trace flag created');
+				toast.success('Trace Flag Created');
 
 			} catch (error) {
-				toast.error(error, 'Trace Flag Creation Failed');
+				this.actionErrorNotifier('Trace Flag Creation Failed', error);
 			}
 			
 		},
@@ -120,9 +136,9 @@ export default Component.extend({
 
 			try {
 				await this.get('onDelete')(traceFlag);
-				toast.success('trace flag deleted');
+				toast.success('Trace Flag Deleted');
 			} catch (error) {
-				toast.error(error, 'Trace Flag Deletion Failed');
+				this.actionErrorNotifier('Trace Flag Deletion Failed', error);
 			}
 
 		},

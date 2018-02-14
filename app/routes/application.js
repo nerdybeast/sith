@@ -5,6 +5,14 @@ export default Route.extend({
 
 	auth: Ember.inject.service('auth'),
 
+	async beforeModel() {
+
+		//Can happen if the user closes the site which clears sessionStorage even though they are still authenticated.
+		if(this.get('auth.isAuthenticated') && !sessionStorage.getItem('profile')) {
+			await this.get('auth').getProfile();
+		}
+	},
+
 	actions: {
 		error(error) {
 

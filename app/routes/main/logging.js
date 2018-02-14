@@ -5,12 +5,11 @@ export default Route.extend({
 	
 	async model() {
 		
-		const [ logs, traceFlags ] = await all([
-			this.get('store').findAll('apex-log'),
-			this.get('store').findAll('trace-flag')
+		const [ logs ] = await all([
+			this.get('store').findAll('apex-log')
 		]);
 
-		return { logs, traceFlags };
+		return { logs };
 	},
 	
 	setupController(controller, model) {
