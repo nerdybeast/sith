@@ -9,5 +9,7 @@ module.exports = {
     browser: true
   },
   rules: {
+  },
+  globals: {
   }
 };

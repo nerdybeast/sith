@@ -1,0 +1,18 @@
+<div class="columns is-gapless">
+	{{#if model.logs}}
+		<div class="column is-narrow">
+			{{apex-log-menu 
+				apexLogs=model.logs 
+				onClick=(action "setActiveLog")
+				onSocketUpdate=(action "updateApexLogsFromSocket")
+			}}
+		</div>
+		<div class="column">
+			{{apex-log-body apexLog=activeApexLogRecord}}
+		</div>
+	{{else}}
+		<div class="main-container">
+			No debug logs found
+		</div>
+	{{/if}}
+</div>

@@ -1,0 +1,18 @@
+{{#bulma-hero}}
+	{{#bulma-hero-content}}
+		<h1 class="title">
+			SITH
+		</h1>
+		<h2 class="subtitle">
+			A Salesforce app for developers 
+		</h2>
+		<hr />
+
+		{{#if auth.isAuthenticated}}
+			{{bulma-button onmousedown=(action "enterSite") label="Enter" isMedium=true isSuccess=true}}
+		{{else}}
+			{{bulma-button onmousedown=(action "login") label="Login" isMedium=true isSuccess=true}}
+		{{/if}}
+
+	{{/bulma-hero-content}}
+{{/bulma-hero}}

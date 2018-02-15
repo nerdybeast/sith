@@ -1,0 +1,31 @@
+{{nav-bar user=auth.userInformation onLogout=(action "logout")}}
+
+<div class="columns is-gapless">
+	<div class="column is-narrow">
+		<aside id="left-nav" class="menu left-nav darker-background">
+			<ul class="menu-list">
+				<li>
+					{{#link-to "main"}}
+						<i class="fa fa-2x fa-tachometer"></i>
+					{{/link-to}}
+				</li>
+				<li>
+					{{#link-to "main.test-runner"}}
+						<i class="fa fa-2x fa-flask"></i>
+					{{/link-to}}
+				</li>
+				<li>
+					{{#link-to "main.logging"}}
+						<i class="fa fa-2x fa-list-alt"></i>
+					{{/link-to}}
+				</li>
+			</ul>
+		</aside>
+	</div>
+	<div class="column">
+		{{!-- TODO: Figure out how to not hard-code this margin... --}}
+		<div class="main-content">
+			{{outlet}}
+		</div>
+	</div>
+</div>

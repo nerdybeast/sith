@@ -1,0 +1,31 @@
+<div class="field is-grouped">
+	<p class="control">
+		{{bulma-button
+			label="1 Hour"
+			isPrimary=true
+			isSmall=true
+			isLoading=hourButtonLoading1
+			onmousedown=(action "clicked" 1)
+		}}
+	</p>
+	<p class="control">
+		{{bulma-button
+			label="3 Hours"
+			isSuccess=true
+			isSmall=true
+			isLoading=hourButtonLoading3
+			onmousedown=(action "clicked" 3)
+		}}
+	</p>
+	<p class="control">
+		{{bulma-button
+			label="6 Hours"
+			isInfo=true
+			isSmall=true
+			isLoading=hourButtonLoading6
+			onmousedown=(action "clicked" 6)
+		}}
+	</p>
+</div>
+
+{{yield}}

@@ -1,0 +1,94 @@
+/* This Bulma import works because of the config in ember-cli-build.js, see sassOptions.includePaths in that file. */
+@import "_variables";
+@import "bulma";
+@import "_overrides";
+
+//It may be due to the color scheme of the dark theme we are using but the text in the ember-power-select
+//was too light to see clearly. Here we are darkening it a little bit.
+//See: https://github.com/cibernox/ember-power-select/blob/master/app/styles/ember-power-select/variables.scss
+//"$black-ter" is defined here: https://bulma.io/documentation/overview/variables/
+$ember-power-select-text-color: $black-ter;
+@import "ember-power-select";
+
+$darkerBackground: darken($background, 12%);
+
+//https://stackoverflow.com/questions/13274599/sass-calculate-percent-minus-px for this crazy calculation
+//$navbar-height is in rem units which sass throws an error that "vh" and "rem" are incompatible but converting 
+//the rem value to a string works for some reason...
+$fullPageHeight: calc(100vh - #{$navbar-height});
+
+.main-container {
+	//column-gap only applies to 1 side of a column so to get the "full" gap we need to double this value.
+	//This gives a padding that matches the gap seen between the columns.
+	//https://bulma.io/documentation/columns/gap/
+	padding: $column-gap * 2;
+}
+
+.full-page-height {
+	height: $fullPageHeight;
+}
+
+.darker-background {
+	background-color: $darkerBackground;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+// Extending the default font awesome animation class
+.fa-spin-2x {
+	-webkit-animation: fa-spin 1s infinite linear;
+	animation: fa-spin 1s infinite linear;
+}
+
+.tippy-tooltip.bulma-theme {
+	background-color: $black;
+}
+
+.tippy-tooltip.bulma-theme .tippy-arrow {
+	border-top: 7px solid $black;
+	// border-right: 7px solid transparent;
+	// border-left: 7px solid transparent;
+	// bottom: -7px;
+	// margin: 0 7px;
+}
+
+//For inputs that are disabled but still want the user to interact with, for example being able
+//to manually use their mouse to copy the data from the input field. Bulma throws a "cursor: not-allowed"
+//on disbaled inputs but that doesn't look very user friendly.
+.input[disabled].interactable {
+	cursor: text;
+	border-color: $border;
+}
+
+//Current width is 66px;
+.left-nav {
+	position: fixed;
+	height: 100%;
+	a {
+		padding: 8px 12px;
+		i {
+			margin: 5px;
+		}
+	}
+}
+
+//To offset the width of the left nav
+.main-content {
+	margin-left:66px;
+}
+
+#ApexLogMenu {
+	position: fixed;
+	height: 100%;
+	width: 225px;
+}
+
+#ApexLogBodyWrapper {
+	margin-left: 225px;
+	max-width: calc(100vw - 291px); //minus left nav and apex log menu
+	pre {
+		height: 100%;
+	}
+}

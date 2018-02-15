@@ -1,0 +1,17 @@
+<aside id="ApexLogMenu" class="menu full-page-height">
+	<ul class="menu-list">
+		{{#each apexLogs as |log|}}
+			<li>
+				<a {{action "setAsActiveLog" log.id}} class={{if log.isActive "is-active"}}>
+					{{moment-format log.startTime "MMM Do LTS"}}
+					<br>
+					<span class="is-size-7">
+						{{log.operation}}
+					</span>
+				</a>
+			</li>
+		{{/each}}
+	</ul>
+</aside>
+
+{{yield}}

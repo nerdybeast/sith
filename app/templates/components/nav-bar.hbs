@@ -1,0 +1,45 @@
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+	<div class="navbar-brand">
+		{{#link-to "main" class="navbar-item"}}
+			SITH
+		{{/link-to}}
+		{{!-- https://bulma.io/documentation/components/navbar/#navbar-burger --}}
+		<button {{action "toggleUserDropdown"}} class="button navbar-burger {{if showUserDropdown 'is-active'}}">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+	</div>
+	<div class="navbar-menu {{if showUserDropdown 'is-active'}}">
+		{{!-- left side items --}}
+		<div class="navbar-start">
+			
+		</div>
+		{{!-- right side items --}}
+		<div class="navbar-end">
+			<div {{action "toggleUserDropdown"}} class="navbar-item has-dropdown {{if showUserDropdown 'is-active'}}">
+				<a class="navbar-link">{{user.email}}</a>
+				<div class="navbar-dropdown">
+					<a {{action "confirmLogout"}} class="navbar-item">Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<div class="modal {{if showLogoutModal 'is-active'}}">
+	<div class="modal-background"></div>
+	<div class="modal-card">
+		<header class="modal-card-header">
+			<p class="modal-card-title">Logout</p>
+			<button class="delete" {{action "cancelLogout"}}></button>
+		</header>
+		<section class="modal-card-body">
+			<p>Are you sure you want to logout?</p>
+		</section>
+		<footer class="modal-card-foot">
+			{{bulma-button label="Logout" isSuccess=true onmousedown=(action "logout")}}
+			{{bulma-button label="Cancel" isDanger=true onmousedown=(action "cancelLogout")}}
+		</footer>
+	</div>
+</div>
