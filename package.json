@@ -15,6 +15,17 @@
     "start": "node --inspect=9229 node_modules/ember-cli/bin/ember serve",
     "test": "ember test"
   },
+  "engines": {
+    "node": "8.9.x",
+    "npm": "5.6.x"
+  },
+  "dependencies": {
+    "auth0-js": "^8.12.1",
+    "bulmaswatch": "^0.5.2",
+    "simplebar": "^2.5.1",
+    "tippy.js": "^2.0.9",
+    "toastr": "^2.1.4"
+  },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
     "bulma": "^0.6.2",
@@ -47,15 +58,5 @@
     "ember-websockets": "^7.1.1",
     "ember-welcome-page": "^3.0.0",
     "loader.js": "^4.2.3"
-  },
-  "engines": {
-    "node": "^4.5 || 6.* || >= 7.*"
-  },
-  "dependencies": {
-    "auth0-js": "^8.12.1",
-    "bulmaswatch": "^0.5.2",
-    "simplebar": "^2.5.1",
-    "tippy.js": "^2.0.9",
-    "toastr": "^2.1.4"
   }
 }
