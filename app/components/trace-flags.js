@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { inject as injectService } from '@ember/service';
+import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import { debug } from '@ember/debug';
 import moment from 'moment';
@@ -7,21 +7,17 @@ import ENV from 'sith/config/environment';
 
 export default Component.extend({
 
-	toast: injectService('toast'),
-	auth: injectService('auth'),
-	io: injectService('socket-io'),
+	toast: service('toast'),
+	auth: service('auth'),
+	io: service('socket-io'),
 
 	//Set on component creation
 	traceFlags: null,
 	debugLevels: null,
 
 	socket() {
-		return this.get('io').socketFor(`${ENV.SITH_API_DOMAIN}/trace-flags`);
+		return this.get('io').socketFor(`${ENV.SITH_API_DOMAIN}/TRACE_FLAGS`);
 	},
-
-	isConnected: computed('socket.socket.connected', function() {
-		return this.get('socket.socket.connected');
-	}),
 
 	init() {
 
@@ -35,7 +31,7 @@ export default Component.extend({
 
 	onConnect() {
 		const socket = this.socket();
-		socket.emit('handshake', this.get('auth.userInformation'));
+		socket.emit('start', this.get('auth.userInformation'));
 	},
 
 	traceFlagsUpdate(traceFlags) {
