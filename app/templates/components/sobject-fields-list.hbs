@@ -1,0 +1,18 @@
+<aside id="SobjectFieldList" class="menu full-page-height">
+	<ul class="menu-list">
+		{{#each sortedFields as |field|}}
+			<li>
+				<a {{action "setAsActiveField" field.name}} class={{if field.isActive "is-active"}}>
+					<div>
+						{{field.name}}
+					</div>
+					<span class="is-size-7 has-text-grey-light">
+						{{field.label}}
+					</span>
+				</a>
+			</li>
+		{{/each}}
+	</ul>
+</aside>
+
+{{yield}}

@@ -1,0 +1,18 @@
+<aside id="SobjectList" class="menu full-page-height">
+	<ul class="menu-list">
+		{{#each sobjects as |sobject|}}
+			<li>
+				<a {{action "setAsActiveSobject" sobject.id}} class={{if sobject.isActive "is-active"}}>
+					<div>
+						{{sobject.name}}
+					</div>
+					<span class="is-size-7 has-text-grey-light">
+						{{sobject.label}}
+					</span>
+				</a>
+			</li>
+		{{/each}}
+	</ul>
+</aside>
+
+{{yield}}

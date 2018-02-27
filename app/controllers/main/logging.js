@@ -1,8 +1,6 @@
 import Ember from 'ember';
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
-import ENV from 'sith/config/environment';
-import { debug } from '@ember/debug';
 
 export default Controller.extend({
 

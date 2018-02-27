@@ -5,7 +5,7 @@
 				<a {{action "setAsActiveLog" log.id}} class={{if log.isActive "is-active"}}>
 					{{moment-format log.startTime "MMM Do LTS"}}
 					<br>
-					<span class="is-size-7">
+					<span class="is-size-7 has-text-grey-light">
 						{{log.operation}}
 					</span>
 				</a>
