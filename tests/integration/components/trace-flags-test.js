@@ -9,16 +9,10 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{trace-flags}}`);
+  assert.expect(0);
 
-  assert.equal(this.$().text().trim(), '');
+  this.set('mockTraceFlags', []);
+  this.set('mockDebugLevels', []);
 
-  // Template block usage:
-  this.render(hbs`
-    {{#trace-flags}}
-      template block text
-    {{/trace-flags}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  this.render(hbs`{{trace-flags traceFlags=mockTraceFlags debugLevels=mockDebugLevels}}`);
 });

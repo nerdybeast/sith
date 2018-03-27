@@ -8,17 +8,10 @@ moduleForComponent('user-information-input', 'Integration | Component | user inf
 test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
+  assert.expect(0);
 
-  this.render(hbs`{{user-information-input}}`);
+  this.on('onCopy', () => { });
+  this.on('onCopyError', () => { });
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#user-information-input}}
-      template block text
-    {{/user-information-input}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  this.render(hbs`{{user-information-input onCopy=(action "onCopy") onCopyError=(action "onCopyError")}}`);
 });

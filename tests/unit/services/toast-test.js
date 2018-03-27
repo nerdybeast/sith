@@ -7,6 +7,13 @@ moduleFor('service:toast', 'Unit | Service | toast', {
 
 // Replace this with your real tests.
 test('it exists', function(assert) {
+
+  const profile = {
+    urls:{}
+  };
+  
+  window.sessionStorage.setItem('profile', JSON.stringify(profile));
+
   let service = this.subject();
   assert.ok(service);
 });

@@ -8,17 +8,24 @@ moduleForComponent('fa-icon', 'Integration | Component | fa icon', {
 test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
+  assert.expect(0);
 
-  this.render(hbs`{{fa-icon}}`);
+  const profile = {
+    urls:{}
+  };
 
-  assert.equal(this.$().text().trim(), '');
+  window.sessionStorage.setItem('profile', JSON.stringify(profile));
 
-  // Template block usage:
+  this.on('delete', () => {});
+
   this.render(hbs`
-    {{#fa-icon}}
-      template block text
-    {{/fa-icon}}
+    {{fa-icon
+      icon="times"
+      animationIcon="cog"
+      colorClass="danger"
+      animationColorClass="success"
+      onClick=(action "delete" traceFlag)
+    }}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
 });
