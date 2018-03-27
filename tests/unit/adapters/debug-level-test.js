@@ -2,7 +2,7 @@ import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('adapter:debug-level', 'Unit | Adapter | debug level', {
   // Specify the other units that are required for this test.
-  // needs: ['serializer:foo']
+  needs: ['service:auth']
 });
 
 // Replace this with your real tests.

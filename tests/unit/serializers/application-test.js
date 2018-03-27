@@ -1,15 +1,45 @@
-import { moduleForModel, test } from 'ember-qunit';
+import { moduleFor, test } from 'ember-qunit';
+import attr from 'ember-data/attr';
+import Model from 'ember-data/model';
+import wait from 'ember-test-helpers/wait';
+import { getOwner } from '@ember/application';
 
-moduleForModel('application', 'Unit | Serializer | application', {
+moduleFor('serializer:application', 'Unit | Serializer | application', {
   // Specify the other units that are required for this test.
-  needs: ['serializer:application']
 });
 
 // Replace this with your real tests.
 test('it serializes records', function(assert) {
-  let record = this.subject();
 
-  let serializedRecord = record.serialize();
+  const owner = getOwner(this);
+  const store = owner.lookup('service:store');
 
-  assert.ok(serializedRecord);
+  // create a dummy model for application
+  let DummyModel = Model.extend({
+      name: attr('string'),
+      address: attr('string')
+  });
+  
+  owner.register('model:application', DummyModel);
+
+  let basicModel = {
+      name: 'Test Name',
+      address: 'SOme Dummy Address'
+  };
+
+  let expectedHash = {
+      data: {
+          attributes: {
+              name: basicModel.name,
+              address: basicModel.address
+          },
+          type: 'applications'
+      }
+  };
+
+  return wait().then(() => {
+      // Create an instance of DummyModel and serialize
+      let serializedRecord = store.createRecord('application', basicModel).serialize();
+      assert.deepEqual(serializedRecord, expectedHash);
+  });
 });
