@@ -82,11 +82,11 @@ $fullPageHeight: calc(100vh - #{$navbar-height});
 #ApexLogMenu {
 	position: fixed;
 	height: 100%;
-	width: 225px;
+	// width: 225px;
 }
 
 #ApexLogBodyWrapper {
-	margin-left: 225px;
+	// margin-left: 225px;
 	max-width: calc(100vw - 291px); //minus left nav and apex log menu
 	pre {
 		height: 100%;
