@@ -2,7 +2,7 @@ import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('controller:main/logging', 'Unit | Controller | main/logging', {
   // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  needs: ['service:ajax', 'service:auth']
 });
 
 // Replace this with your real tests.

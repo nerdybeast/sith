@@ -20,10 +20,10 @@
     "npm": "5.6.x"
   },
   "dependencies": {
-    "auth0-js": "^8.12.1",
-    "bulmaswatch": "^0.5.2",
-    "simplebar": "^2.5.1",
-    "tippy.js": "^2.0.9",
+    "auth0-js": "^9.4.2",
+    "bulmaswatch": "^0.6.2",
+    "simplebar": "^2.6.1",
+    "tippy.js": "^2.4.1",
     "toastr": "^2.1.4"
   },
   "devDependencies": {
@@ -41,7 +41,7 @@
     "ember-cli-htmlbars": "^2.0.1",
     "ember-cli-htmlbars-inline-precompile": "^1.0.0",
     "ember-cli-inject-live-reload": "^1.4.1",
-    "ember-cli-moment-shim": "^3.5.0",
+    "ember-cli-moment-shim": "^3.5.3",
     "ember-cli-qunit": "^4.1.1",
     "ember-cli-sass": "^6.2.0",
     "ember-cli-shims": "^1.2.0",
@@ -51,7 +51,7 @@
     "ember-export-application-global": "^2.0.0",
     "ember-font-awesome": "^3.1.0",
     "ember-load-initializers": "^1.0.0",
-    "ember-moment": "^7.5.0",
+    "ember-moment": "^7.6.0",
     "ember-power-select": "^2.0.0-beta.0",
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.17.0",
