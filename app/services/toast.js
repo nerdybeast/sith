@@ -17,7 +17,7 @@ export default Service.extend({
 	}),
 	
 	error: toast('error', {
-		timeOut: 5000
+		timeOut: 10000
 	}),
 
 	init() {
