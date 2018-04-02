@@ -22,7 +22,7 @@
   "dependencies": {
     "auth0-js": "^9.4.2",
     "bulmaswatch": "^0.6.2",
-    "simplebar": "^2.6.0",
+    "simplebar": "^2.6.1",
     "tippy.js": "^2.4.1",
     "toastr": "^2.1.4"
   },
