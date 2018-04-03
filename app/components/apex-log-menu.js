@@ -9,7 +9,7 @@ export default Component.extend({
 	auth: service('auth'),
 
 	socket() {
-		return this.get('io').socketFor(`${ENV.SITH_API_DOMAIN}/apex-logs`);
+		return this.get('io').socketFor(`${ENV.SITH_API_DOMAIN}/APEX_LOGS`);
 	},
 
 	init() {
