@@ -17,6 +17,9 @@ $darkerBackground: darken($background, 12%);
 //the rem value to a string works for some reason...
 $fullPageHeight: calc(100vh - #{$navbar-height});
 
+//A standard input is 36px in height
+$sobjectListHeight: calc(100vh - #{$navbar-height} - 36px);
+
 .main-container {
 	//column-gap only applies to 1 side of a column so to get the "full" gap we need to double this value.
 	//This gives a padding that matches the gap seen between the columns.
@@ -91,4 +94,8 @@ $fullPageHeight: calc(100vh - #{$navbar-height});
 	pre {
 		height: 100%;
 	}
+}
+
+#SobjectList {
+	height: $sobjectListHeight;
 }

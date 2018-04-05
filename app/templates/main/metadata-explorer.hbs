@@ -1,5 +1,5 @@
 <div class="columns is-gapless">
-	
+
 	<div class="column is-narrow">
 		{{sobject-list sobjects=model.sobjects onClick=(action "setActiveSobject")}}
 	</div>
@@ -26,6 +26,7 @@
 	{{else}}
 		Loading field names...
 	{{/unless}}
+
 </div>
 
 {{outlet}}
