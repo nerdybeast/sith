@@ -1,15 +1,17 @@
-import Ember from 'ember';
 import Service from '@ember/service';
 import ENV from 'sith/config/environment';
 import auth0 from 'auth0';
 import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
+import { Promise } from 'rsvp';
+import { isPresent } from '@ember/utils';
 
 export default Service.extend({
 
 	ajax: service('ajax'),
 	store: service('store'),
 
-	auth0: Ember.computed(function() {
+	auth0: computed(function() {
 		
 		//The "auth0" var is global, it was imported in ember-cli-build.js
 		return new auth0.WebAuth({
@@ -28,7 +30,7 @@ export default Service.extend({
 	},
 
 	handleAuthentication() {
-		return new Ember.RSVP.Promise((resolve, reject) => {
+		return new Promise((resolve, reject) => {
 			this.get('auth0').parseHash((error, authResult) => {
 				
 				//Will be true if the current url does not have a hash to parse
@@ -53,8 +55,8 @@ export default Service.extend({
 	},
 
 	//Volatile property meaning the value won't be cached, fresh data pull every time.
-	isAuthenticated: Ember.computed(function() {
-		return Ember.isPresent(this.getSession().access_token) && !this.isExpired();
+	isAuthenticated: computed(function() {
+		return isPresent(this.getSession().access_token) && !this.isExpired();
 	}).volatile(),
 
 	getSession() {
@@ -106,7 +108,7 @@ export default Service.extend({
 		return profile;
 	},
 
-	userInformation: Ember.computed(function() {
+	userInformation: computed(function() {
 		
 		const profile = JSON.parse(sessionStorage.getItem('profile'));
 		const customDomain = profile.urls.custom_domain;

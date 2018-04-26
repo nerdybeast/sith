@@ -1,11 +1,11 @@
-import Ember from 'ember';
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default Controller.extend({
 
-	ajax: Ember.inject.service('ajax'),
-	auth: Ember.inject.service('auth'),
+	ajax: service('ajax'),
+	auth: service('auth'),
 
 	fetchingLogContent: false,
 

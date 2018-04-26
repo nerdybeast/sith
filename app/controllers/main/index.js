@@ -98,6 +98,11 @@ export default Controller.extend({
 		cancelModification(traceFlag) {
 			traceFlag.rollbackAttributes();
 			this.updateTraceFlagsFromStore();
+		},
+
+		logout() {
+			this.get('auth').logout();
+			this.transitionToRoute('welcome');
 		}
 	}
 });
