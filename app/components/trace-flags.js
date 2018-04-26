@@ -64,7 +64,7 @@ export default Component.extend({
 		errors.forEach(x => toast.error(x.message, title));
 
 		if(errors.find(x => x.statusCode === 401)) {
-			this.sendAction('logout');
+			this.get('logout')();
 		}
 	},
 
