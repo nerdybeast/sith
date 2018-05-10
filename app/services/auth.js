@@ -129,5 +129,18 @@ export default Service.extend({
 			orgVersion
 		};
 
+	}).volatile(),
+
+	requestHeaders: computed(function() {
+
+		const { sessionId, instanceUrl, organizationId, userId, orgVersion } = this.get('userInformation');
+
+		return { 
+			'salesforce-session-token': sessionId,
+			'instance-url': instanceUrl,
+			'organization-id': organizationId,
+			'user-id': userId,
+			'org-version': orgVersion
+		};
 	}).volatile()
 });
