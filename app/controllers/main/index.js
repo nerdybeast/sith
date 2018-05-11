@@ -1,10 +1,10 @@
 import Controller, { inject as injectController } from '@ember/controller';
-import { inject as injectService } from '@ember/service'
+import { inject as service } from '@ember/service';
 
 export default Controller.extend({
 	
 	mainController: injectController('main'),
-	auth: injectService('auth'),
+	auth: service('auth'),
 
 	updateTraceFlagsFromStore() {
 		this.get('mainController').set('model.traceFlags', this.get('store').peekAll('trace-flag'));
@@ -98,6 +98,11 @@ export default Controller.extend({
 		cancelModification(traceFlag) {
 			traceFlag.rollbackAttributes();
 			this.updateTraceFlagsFromStore();
+		},
+
+		logout() {
+			this.get('auth').logout();
+			this.transitionToRoute('welcome');
 		}
 	}
 });

@@ -1,0 +1,46 @@
+<div class="panel">
+	<div class="panel-heading">
+		<div class="level">
+			<div class="level-left">
+				<div class="level-item">Record Lookup</div>
+			</div>
+			<div class="level-item"></div>
+			<div class="level-item"></div>
+			<div class="level-item">
+				<div class="control {{if searchRecords.isRunning 'is-loading'}}" style="width:100%;">
+					{{input type="text" class="input" value=searchTerm key-up=(perform searchRecords)}}
+				</div>
+			</div>
+			<div class="level-item"></div>
+			<div class="level-item"></div>
+			<div class="level-item"></div>
+		</div>
+	</div>
+	{{#if searchResults}}
+		<div class="panel-block is-paddingless">
+			<table class="table is-narrow is-fullwidth" style="margin-bottom:0px;">
+				<thead>
+					<th>Short Id (15 char)</th>
+					<th>Long Id (18 char)</th>
+					<th>Name</th>
+					<th>Object</th>
+				</thead>
+				<tbody>
+					{{#each searchResults as |record|}}
+						<tr>
+							<td>{{record.shortId}}</td>
+							<td>{{record.sobject.id}}</td>
+							<td>{{record.name}}</td>
+							<td>{{record.sobject.attributes.type}}</td>
+						</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	{{else}}
+		<div class="panel-block">
+			No records found
+		</div>
+	{{/if}}
+
+</div>
