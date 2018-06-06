@@ -1,0 +1,15 @@
+{{#if isReference}}
+	{{field.type}} ({{link-to referenceTo "main.sobject" referenceTo}})
+{{else if isNumber}}
+	{{field.type}} ({{field.precision}},{{field.scale}})
+{{else if isPicklist}}
+	<div class="select is-small">
+		<select>
+			{{#each picklistOptions as |option|}}
+				<option>{{option.label}}</option>
+			{{/each}}
+		</select>
+	</div>
+{{else}}
+	{{field.type}}
+{{/if}}

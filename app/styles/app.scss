@@ -15,7 +15,7 @@ $darkerBackground: darken($background, 12%);
 //https://stackoverflow.com/questions/13274599/sass-calculate-percent-minus-px for this crazy calculation
 //$navbar-height is in rem units which sass throws an error that "vh" and "rem" are incompatible but converting 
 //the rem value to a string works for some reason...
-$fullPageHeight: calc(100vh - #{$navbar-height});
+$fullPageHeight: calc(100vh - #{$navbar-height} - 2px);
 
 //A standard input is 36px in height
 $sobjectListHeight: calc(100vh - #{$navbar-height} - 36px);
@@ -28,7 +28,9 @@ $sobjectListHeight: calc(100vh - #{$navbar-height} - 36px);
 }
 
 .full-page-height {
+	min-height: $fullPageHeight;
 	height: $fullPageHeight;
+	max-height: $fullPageHeight;
 }
 
 .darker-background {
@@ -94,4 +96,8 @@ $sobjectListHeight: calc(100vh - #{$navbar-height} - 36px);
 	pre {
 		height: 100%;
 	}
+}
+
+.margin-top {
+	margin-top: $gap;
 }

@@ -1,7 +1,7 @@
 <div class="columns is-gapless">
 
-	<div class="column is-narrow">
-		{{sobject-list sobjects=model.sobjects onClick=(action "setActiveSobject")}}
+	<div class="column">
+		{{sobject-list sobjects=model.sobjects onClick=(action "goToSobjectView")}}
 	</div>
 
 	{{#unless loadingSobjectFields}}

@@ -58,6 +58,10 @@ export default Controller.extend({
 
 		selectStarCopyError() {
 
+		},
+
+		goToSobjectView(sobject) {
+			this.transitionToRoute(`main.sobject`, sobject.name);
 		}
 	}
 

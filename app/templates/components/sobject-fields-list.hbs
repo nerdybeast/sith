@@ -1,6 +1,6 @@
-<aside id="SobjectFieldList" class="menu full-page-height">
+<!--<aside id="SobjectFieldList" class="menu full-page-height">
 	<ul class="menu-list">
-		{{#each sortedFields as |field|}}
+		{{!#each sortedFields as |field|}}
 			<li>
 				<a {{action "setAsActiveField" field.name}} class={{if field.isActive "is-active"}}>
 					<div>
@@ -11,8 +11,24 @@
 					</span>
 				</a>
 			</li>
-		{{/each}}
+		{{!/each}}
 	</ul>
-</aside>
+</aside>-->
+<div class="full-page-height">
+	{{!-- <div id="SobjectFieldList"> --}}
+		<div class="columns is-multiline">
+			{{#each sortedFields as |field|}}
+				<div class="column is-12">
+					<div>
+						{{field.name}}
+					</div>
+					<span class="is-size-7 has-text-grey-light">
+						{{field.label}}
+					</span>
+				</div>
+			{{/each}}
+		</div>
+	{{!-- </div> --}}
+</div>
 
 {{yield}}

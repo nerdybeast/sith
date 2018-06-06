@@ -1,23 +1,46 @@
-<div class="full-page-height">
-
-	{{input type="text" class="input" value=filterMatch key-up=(action 'filterList')}}
-
-	<div id="SobjectList" class="menu">
-		<ul class="menu-list">
-			{{#each filteredSobjects as |sobject|}}
-				<li>
-					<a {{action "setAsActiveSobject" sobject.id}} class={{if sobject.isActive "is-active"}}>
-						<div>
-							{{sobject.name}}
-						</div>
-						<span class="is-size-7 has-text-grey-light">
-							{{sobject.label}}
-						</span>
-					</a>
-				</li>
-			{{/each}}
-		</ul>
+<div class="columns">
+	<div class="column is-4 is-offset-4">
+		<div class="margin-top">
+			{{input type="text" class="input" value=filterMatch key-up=(action 'filterList') placeholder="Search"}}
+		</div>
 	</div>
 </div>
+
+<table class="table is-fullwidth">
+	<thead>
+		<th></th>
+		<th>Prefix</th>
+		<th>Name</th>
+		<th class="has-text-centered">
+			Queryable
+			{{fa-icon icon="question-circle" isClickable=false title="The sobject can be queried via SOQL by the current user"}}
+		</th>
+		<th class="has-text-centered">
+			Searchable
+			{{fa-icon icon="question-circle" isClickable=false title="The sobject can be searched via SOSL by the current user"}}
+		</th>
+		<th class="has-text-centered">
+			Createable
+			{{fa-icon icon="question-circle" isClickable=false title="The sobject can be created via DML by the current user"}}
+		</th>
+		<th class="has-text-centered">
+			Updateable
+			{{fa-icon icon="question-circle" isClickable=false title="The sobject can be updated via DML by the current user"}}
+		</th>
+		<th class="has-text-centered">
+			Deleteable
+			{{fa-icon icon="question-circle" isClickable=false title="The sobject can be deleted via DML by the current user"}}
+		</th>
+		<th class="has-text-centered">
+			Mergeable
+			{{fa-icon icon="question-circle" isClickable=false title="The sobject can be merged with other sobjects of the same type by the current user"}}
+		</th>
+	</thead>
+	<tbody>
+		{{#each filteredSobjects as |sobject|}}
+			{{sobject-row tagName="tr" sobject=sobject onRowClick=(action onClick)}}
+		{{/each}}
+	</tbody>
+</table>
 
 {{yield}}
