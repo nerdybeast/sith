@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { debounce } from '@ember/runloop';
+// import { debounce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import { task, timeout } from 'ember-concurrency';
 import { isBlank } from '@ember/utils';
@@ -8,19 +8,19 @@ export default Component.extend({
 
 	basicAjax: service('basic-ajax'),
 
-	searchTerm: null,
+	// searchTerm: null,
 
-	actions: {
+	// actions: {
 
-		search() {
-			debounce(this, this._runSearch, 500);
-		},
+	// 	search() {
+	// 		debounce(this, this._runSearch, 500);
+	// 	},
 
-		recordSelected(record) {
-			this._recordSelected(record.sobject);
-		}
+	// 	recordSelected(record) {
+	// 		this._recordSelected(record.sobject);
+	// 	}
 
-	},
+	// },
 
 	searchRecords: task(function * (searchTerm) {
 
@@ -40,21 +40,21 @@ export default Component.extend({
 
 	}).restartable(),
 
-	async _runSearch() {
+	// async _runSearch() {
 
-		const searchTerm = this.get('searchTerm');
-		let searchResults = [];
+	// 	const searchTerm = this.get('searchTerm');
+	// 	let searchResults = [];
 
-		try {
-			searchResults = await this.get('basicAjax').searchByIdentifier(searchTerm);
-		} catch (error) {
-			//
-		}
+	// 	try {
+	// 		searchResults = await this.get('basicAjax').searchByIdentifier(searchTerm);
+	// 	} catch (error) {
+	// 		//
+	// 	}
 
-		this.set('searchResults', searchResults);
-	},
+	// 	this.set('searchResults', searchResults);
+	// },
 
-	_recordSelected(record) {
-		this.set('record', record);
-	}
+	// _recordSelected(record) {
+	// 	this.set('record', record);
+	// }
 });

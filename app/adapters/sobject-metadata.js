@@ -20,6 +20,10 @@ export default ApplicationAdapter.extend({
 
 	urlForFindAll() {
 		return `${this.get('host')}/${this.get('namespace')}/global`;
+	},
+
+	urlForQuery(query/*, modelName*/) {
+		return `${this.get('host')}/${this.get('namespace')}/global`;
 	}
 
 });

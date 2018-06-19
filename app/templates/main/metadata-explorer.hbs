@@ -1,7 +1,7 @@
 <div class="columns is-gapless">
 
 	<div class="column">
-		{{sobject-list sobjects=model.sobjects onClick=(action "goToSobjectView")}}
+		{{sobject-list sobjects=model.sobjects onClick=(action "goToSobjectView") onSearch=(action "searchForMetadata")}}
 	</div>
 
 	{{#unless loadingSobjectFields}}

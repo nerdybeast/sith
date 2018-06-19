@@ -1,7 +1,9 @@
 <div class="columns">
 	<div class="column is-4 is-offset-4">
 		<div class="margin-top">
-			{{input type="text" class="input" value=filterMatch key-up=(action 'filterList') placeholder="Search"}}
+			<div class="control {{if search.isRunning 'is-loading'}}" style="width:100%;">
+				{{input type="text" class="input" placeholder="Search" value=filterMatch key-up=(perform search)}}
+			</div>
 		</div>
 	</div>
 </div>
@@ -37,7 +39,7 @@
 		</th>
 	</thead>
 	<tbody>
-		{{#each filteredSobjects as |sobject|}}
+		{{#each sobjects as |sobject|}}
 			{{sobject-row tagName="tr" sobject=sobject onRowClick=(action onClick)}}
 		{{/each}}
 	</tbody>

@@ -15,7 +15,7 @@ export default Component.extend(ValidateMixin, {
 	},
 
 	click() {
-		alert(this.get('sobject.label'));
+		//alert(this.get('sobject.label'));
 		this.get('onRowClick')(this.get('sobject'));
 	}
 
