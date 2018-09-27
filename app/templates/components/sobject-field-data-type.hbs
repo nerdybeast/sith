@@ -1,0 +1,21 @@
+{{#if isLookup}}
+	<span class="after-colon">
+		{{fieldType}}:
+	</span>
+	{{link-to referenceTo "main.sobject" referenceTo}}
+{{else if isNumber}}
+	{{fieldType}} ({{field.precision}},{{field.scale}})
+{{else if isPicklist}}
+	<span class="after-colon">
+		{{fieldType}}:
+	</span>
+	<div class="select is-small">
+		<select>
+			{{#each field.picklistValues as |option|}}
+				<option>{{option.label}}</option>
+			{{/each}}
+		</select>
+	</div>
+{{else}}
+	{{fieldType}}
+{{/if}}

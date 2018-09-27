@@ -1,12 +1,12 @@
 import Component from '@ember/component';
 import SimpleBar from 'simplebar';
 import ENV from 'sith/config/environment';
-import { inject as injectService } from '@ember/service';
+import { inject as service } from '@ember/service';
 
 export default Component.extend({
 
-	io: injectService('socket-io'),
-	auth: injectService('auth'),
+	io: service('socket-io'),
+	auth: service('auth'),
 
 	socket() {
 		return this.get('io').socketFor(`${ENV.SITH_API_DOMAIN}/APEX_LOGS`);

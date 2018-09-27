@@ -1,0 +1,51 @@
+<thead>
+	<th></th>
+	<th>API Name</th>
+	<th>Label</th>
+	<th>Salesforce Data Type</th>
+	<th>Api Data Type</th>
+	<th>Length</th>
+	<th>
+		Createable
+		{{fa-icon icon="question-circle" isClickable=false title="Field can be set on record creation"}}
+	</th>
+	<th>
+		Updateable
+		{{fa-icon icon="question-circle" isClickable=false title="Field can be set on record update"}}
+	</th>
+</thead>
+<tbody>
+	{{#each sortedFields as |field|}}
+		<tr>
+			<td>
+				{{meta-tag label=field.metaTagConfig.label title=field.metaTagConfig.title colorClass=field.metaTagConfig.colorClass}}
+			</td>
+			<td>
+				<span style="padding-right:5px;">
+					{{field.name}}
+				</span>
+				{{#if field.calculated}}
+					{{meta-tag label="formula" title=field.calculatedFormula colorClass="is-link" isRounded=true}}
+				{{/if}}
+			</td>
+			<td>
+				{{field.label}}
+			</td>
+			<td>
+				{{sobject-field-data-type field=field controllingField="metadata.type"}}
+			</td>
+			<td>
+				{{sobject-field-data-type field=field controllingField="apiDataType"}}
+			</td>
+			<td>
+				{{field.length}}
+			</td>
+			<td>
+				{{has-feature feature=field.createable}}
+			</td>
+			<td>
+				{{has-feature feature=field.updateable}}
+			</td>
+		</tr>
+	{{/each}}
+</tbody>

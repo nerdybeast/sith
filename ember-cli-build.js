@@ -7,7 +7,8 @@ module.exports = function(defaults) {
 	let app = new EmberApp(defaults, {
 		
 		'ember-cli-babel': {
-			includePolyfill: true
+			includePolyfill: true,
+			compileModules: true
 		},
 
 		//Available because we ran `ember install ember-cli-sass`
@@ -29,6 +30,11 @@ module.exports = function(defaults) {
 				//See: https://github.com/babel/ember-cli-babel#polyfill
 				'transform-async-to-generator'
 			]
+		},
+
+		sourcemaps: {
+			enabled: true,
+			extensions: ['js']
 		}
 	});
 

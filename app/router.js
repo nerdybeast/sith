@@ -12,6 +12,8 @@ Router.map(function() {
   this.route('main', { path: '/' }, function() {
     this.route('test-runner');
     this.route('logging', function() {});
+    this.route('metadata-explorer');
+    this.route('sobject', { path: '/sobject/:name' });
   });
 });
 

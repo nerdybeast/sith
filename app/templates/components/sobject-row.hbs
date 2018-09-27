@@ -1,0 +1,30 @@
+<td>
+	{{sobject-meta-tag sobject=sobject}}
+</td>
+<td>
+	{{sobject.keyPrefix}}
+</td>
+<td>
+	<p>{{sobject.name}}</p>
+	<p class="has-text-grey-light is-size-7">{{sobject.label}}</p>
+</td>
+<td class="has-text-centered">
+	{{has-feature feature=sobject.queryable}}
+</td>
+<td class="has-text-centered">
+	{{has-feature feature=sobject.searchable}}
+</td>
+<td class="has-text-centered">
+	{{has-feature feature=sobject.createable}}
+</td>
+<td class="has-text-centered">
+	{{has-feature feature=sobject.updateable}}
+</td>
+<td class="has-text-centered">
+	{{has-feature feature=sobject.deletable}}
+</td>
+<td class="has-text-centered">
+	{{has-feature feature=sobject.mergeable}}
+</td>
+
+{{yield}}

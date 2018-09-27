@@ -1,0 +1,48 @@
+<div class="columns">
+	<div class="column is-4 is-offset-4">
+		<div class="margin-top">
+			<div class="control {{if search.isRunning 'is-loading'}}" style="width:100%;">
+				{{input type="text" class="input" placeholder="Search" value=filterMatch key-up=(perform search)}}
+			</div>
+		</div>
+	</div>
+</div>
+
+<table class="table is-narrow is-fullwidth is-hoverable">
+	<thead>
+		<th></th>
+		<th>Id Prefix</th>
+		<th>Name</th>
+		<th class="has-text-centered">
+			Queryable
+			{{fa-icon icon="question-circle" isClickable=false title="The sobject can be queried via SOQL by the current user"}}
+		</th>
+		<th class="has-text-centered">
+			Searchable
+			{{fa-icon icon="question-circle" isClickable=false title="The sobject can be searched via SOSL by the current user"}}
+		</th>
+		<th class="has-text-centered">
+			Createable
+			{{fa-icon icon="question-circle" isClickable=false title="The sobject can be created via DML by the current user"}}
+		</th>
+		<th class="has-text-centered">
+			Updateable
+			{{fa-icon icon="question-circle" isClickable=false title="The sobject can be updated via DML by the current user"}}
+		</th>
+		<th class="has-text-centered">
+			Deleteable
+			{{fa-icon icon="question-circle" isClickable=false title="The sobject can be deleted via DML by the current user"}}
+		</th>
+		<th class="has-text-centered">
+			Mergeable
+			{{fa-icon icon="question-circle" isClickable=false title="The sobject can be merged with other sobjects of the same type by the current user"}}
+		</th>
+	</thead>
+	<tbody>
+		{{#each sobjects as |sobject|}}
+			{{sobject-row tagName="tr" class="clickable" sobject=sobject onRowClick=(action onClick)}}
+		{{/each}}
+	</tbody>
+</table>
+
+{{yield}}

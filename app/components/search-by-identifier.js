@@ -7,7 +7,6 @@ export default Component.extend({
 
 	basicAjax: service('basic-ajax'),
 
-	searchTerm: null,
 	searchResults: null,
 	noResultsMessage: 'No records found',
 

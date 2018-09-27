@@ -1,0 +1,11 @@
+
+{{#panel-with-table heading="Fields"}}
+	{{sobject-fields-list fields=model.modifiedFields}}
+{{/panel-with-table}}
+<br>
+<br>
+{{#panel-with-table heading="Record Types"}}
+	{{record-types-list recordTypes=model.recordTypes}}
+{{/panel-with-table}}
+
+{{outlet}}
