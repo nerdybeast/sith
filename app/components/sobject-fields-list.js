@@ -1,30 +1,42 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object'
-import SimpleBar from 'simplebar';
+import { isEmpty } from '@ember/utils';
+import { ColorClass } from '../utils/constants';
+import ValidateMixin from '../mixins/validate-component-arguments';
 
-export default Component.extend({
+export default Component.extend(ValidateMixin, {
 
 	fields: null,
 
-	sortedFields: computed('fields.[]', function() {
-		const fields = this.get('fields') || [];
-		return fields.sortBy('name');
-	}),
+	tagName: 'table',
+	classNames: ['table', 'is-narrow', 'is-fullwidth', 'is-hoverable', 'is-marginless'],
 
-	didInsertElement() {
-		
-		new SimpleBar(document.getElementById('SobjectFieldList'), {
-			scrollbarMinSize: 30
-		});
-
+	init() {
+		this._super(...arguments);
+		this.validate('sobject-fields-list', ['fields']);
 	},
 
-	actions: {
+	sortedFields: computed('addedFieldMetaTagConfig', function() {
+		return this.get('addedFieldMetaTagConfig').sortBy('name');
+	}),
 
-		setAsActiveField(fieldName) {
-			this.get('onClick')(fieldName);
-		}
+	addedFieldMetaTagConfig: computed('fields.[]', function() {
 
-	}
+		const fields = this.get('fields') || [];
+
+		fields.forEach(field => {
+
+			if(isEmpty(field.metaTagConfig)) {
+				field.metaTagConfig = {
+					label: field.custom ? 'C' : 'S',
+					title: field.custom ? 'Custom Field' : 'Standard Field',
+					colorClass: field.custom ? ColorClass.WARNING : ColorClass.SUCCESS
+				};
+			}
+
+		});
+
+		return fields;
+	})
 
 });

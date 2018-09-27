@@ -101,3 +101,7 @@ $sobjectListHeight: calc(100vh - #{$navbar-height} - 36px);
 .margin-top {
 	margin-top: $gap;
 }
+
+.after-colon {
+	margin-right: 5px;
+}

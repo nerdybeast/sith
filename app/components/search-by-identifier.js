@@ -1,5 +1,4 @@
 import Component from '@ember/component';
-// import { debounce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import { task, timeout } from 'ember-concurrency';
 import { isBlank } from '@ember/utils';
@@ -8,53 +7,36 @@ export default Component.extend({
 
 	basicAjax: service('basic-ajax'),
 
-	// searchTerm: null,
+	searchResults: null,
+	noResultsMessage: 'No records found',
 
-	// actions: {
+	actions: {
 
-	// 	search() {
-	// 		debounce(this, this._runSearch, 500);
-	// 	},
+		recordSelected(record) {
+			this.set('record', record.sobject);
+		}
 
-	// 	recordSelected(record) {
-	// 		this._recordSelected(record.sobject);
-	// 	}
-
-	// },
+	},
 
 	searchRecords: task(function * (searchTerm) {
 
 		let searchResults = [];
 
-		if(isBlank(searchTerm)) return searchResults;
+		if(isBlank(searchTerm)) {
+			this.set('noResultsMessage', 'No records found');
+			return searchResults;
+		}
 
 		yield timeout(500);
 
 		try {
 			searchResults = yield this.get('basicAjax').searchByIdentifier(searchTerm);
 		} catch (error) {
-			//
+			this.set('noResultsMessage', error.payload.errors[0].message);
 		}
 
 		this.set('searchResults', searchResults);
 
-	}).restartable(),
+	}).restartable()
 
-	// async _runSearch() {
-
-	// 	const searchTerm = this.get('searchTerm');
-	// 	let searchResults = [];
-
-	// 	try {
-	// 		searchResults = await this.get('basicAjax').searchByIdentifier(searchTerm);
-	// 	} catch (error) {
-	// 		//
-	// 	}
-
-	// 	this.set('searchResults', searchResults);
-	// },
-
-	// _recordSelected(record) {
-	// 	this.set('record', record);
-	// }
 });

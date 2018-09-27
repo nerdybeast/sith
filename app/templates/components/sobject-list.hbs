@@ -8,10 +8,10 @@
 	</div>
 </div>
 
-<table class="table is-fullwidth">
+<table class="table is-narrow is-fullwidth is-hoverable">
 	<thead>
 		<th></th>
-		<th>Prefix</th>
+		<th>Id Prefix</th>
 		<th>Name</th>
 		<th class="has-text-centered">
 			Queryable
@@ -40,7 +40,7 @@
 	</thead>
 	<tbody>
 		{{#each sobjects as |sobject|}}
-			{{sobject-row tagName="tr" sobject=sobject onRowClick=(action onClick)}}
+			{{sobject-row tagName="tr" class="clickable" sobject=sobject onRowClick=(action onClick)}}
 		{{/each}}
 	</tbody>
 </table>

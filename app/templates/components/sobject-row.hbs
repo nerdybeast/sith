@@ -9,46 +9,22 @@
 	<p class="has-text-grey-light is-size-7">{{sobject.label}}</p>
 </td>
 <td class="has-text-centered">
-	{{#if sobject.queryable}}
-		{{fa-icon icon="check" isClickable=false colorClass="success"}}
-	{{else}}
-		{{fa-icon icon="times" isClickable=false colorClass="danger"}}
-	{{/if}}
+	{{has-feature feature=sobject.queryable}}
 </td>
 <td class="has-text-centered">
-	{{#if sobject.searchable}}
-		{{fa-icon icon="check" isClickable=false colorClass="success"}}
-	{{else}}
-		{{fa-icon icon="times" isClickable=false colorClass="danger"}}
-	{{/if}}
+	{{has-feature feature=sobject.searchable}}
 </td>
 <td class="has-text-centered">
-	{{#if sobject.createable}}
-		{{fa-icon icon="check" isClickable=false colorClass="success"}}
-	{{else}}
-		{{fa-icon icon="times" isClickable=false colorClass="danger"}}
-	{{/if}}
+	{{has-feature feature=sobject.createable}}
 </td>
 <td class="has-text-centered">
-	{{#if sobject.updateable}}
-		{{fa-icon icon="check" isClickable=false colorClass="success"}}
-	{{else}}
-		{{fa-icon icon="times" isClickable=false colorClass="danger"}}
-	{{/if}}
+	{{has-feature feature=sobject.updateable}}
 </td>
 <td class="has-text-centered">
-	{{#if sobject.deletable}}
-		{{fa-icon icon="check" isClickable=false colorClass="success"}}
-	{{else}}
-		{{fa-icon icon="times" isClickable=false colorClass="danger"}}
-	{{/if}}
+	{{has-feature feature=sobject.deletable}}
 </td>
 <td class="has-text-centered">
-	{{#if sobject.mergeable}}
-		{{fa-icon icon="check" isClickable=false colorClass="success"}}
-	{{else}}
-		{{fa-icon icon="times" isClickable=false colorClass="danger"}}
-	{{/if}}
+	{{has-feature feature=sobject.mergeable}}
 </td>
 
 {{yield}}

@@ -1,28 +1,11 @@
-<table class="table is-narrow is-fullwidth is-hoverable">
-	<thead>
-		<th></th>
-		<th>API Name</th>
-		<th>Label</th>
-		<th>Data Type</th>
-	</thead>
-	<tbody>
-		{{#each sortedFields as |field|}}
-			<tr>
-				<td>
-					{{meta-tag label=field.metaTagConfig.label title=field.metaTagConfig.title colorClass=field.metaTagConfig.colorClass}}
-				</td>
-				<td>
-					{{field.name}}
-				</td>
-				<td>
-					{{field.label}}
-				</td>
-				<td>
-					{{sobject-field-data-type field=field}}
-				</td>
-			</tr>
-		{{/each}}
-	</tbody>
-</table>
+
+{{#panel-with-table heading="Fields"}}
+	{{sobject-fields-list fields=model.modifiedFields}}
+{{/panel-with-table}}
+<br>
+<br>
+{{#panel-with-table heading="Record Types"}}
+	{{record-types-list recordTypes=model.recordTypes}}
+{{/panel-with-table}}
 
 {{outlet}}

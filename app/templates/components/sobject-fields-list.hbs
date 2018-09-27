@@ -1,34 +1,51 @@
-<!--<aside id="SobjectFieldList" class="menu full-page-height">
-	<ul class="menu-list">
-		{{!#each sortedFields as |field|}}
-			<li>
-				<a {{action "setAsActiveField" field.name}} class={{if field.isActive "is-active"}}>
-					<div>
-						{{field.name}}
-					</div>
-					<span class="is-size-7 has-text-grey-light">
-						{{field.label}}
-					</span>
-				</a>
-			</li>
-		{{!/each}}
-	</ul>
-</aside>-->
-<div class="full-page-height">
-	{{!-- <div id="SobjectFieldList"> --}}
-		<div class="columns is-multiline">
-			{{#each sortedFields as |field|}}
-				<div class="column is-12">
-					<div>
-						{{field.name}}
-					</div>
-					<span class="is-size-7 has-text-grey-light">
-						{{field.label}}
-					</span>
-				</div>
-			{{/each}}
-		</div>
-	{{!-- </div> --}}
-</div>
-
-{{yield}}
+<thead>
+	<th></th>
+	<th>API Name</th>
+	<th>Label</th>
+	<th>Salesforce Data Type</th>
+	<th>Api Data Type</th>
+	<th>Length</th>
+	<th>
+		Createable
+		{{fa-icon icon="question-circle" isClickable=false title="Field can be set on record creation"}}
+	</th>
+	<th>
+		Updateable
+		{{fa-icon icon="question-circle" isClickable=false title="Field can be set on record update"}}
+	</th>
+</thead>
+<tbody>
+	{{#each sortedFields as |field|}}
+		<tr>
+			<td>
+				{{meta-tag label=field.metaTagConfig.label title=field.metaTagConfig.title colorClass=field.metaTagConfig.colorClass}}
+			</td>
+			<td>
+				<span style="padding-right:5px;">
+					{{field.name}}
+				</span>
+				{{#if field.calculated}}
+					{{meta-tag label="formula" title=field.calculatedFormula colorClass="is-link" isRounded=true}}
+				{{/if}}
+			</td>
+			<td>
+				{{field.label}}
+			</td>
+			<td>
+				{{sobject-field-data-type field=field controllingField="metadata.type"}}
+			</td>
+			<td>
+				{{sobject-field-data-type field=field controllingField="apiDataType"}}
+			</td>
+			<td>
+				{{field.length}}
+			</td>
+			<td>
+				{{has-feature feature=field.createable}}
+			</td>
+			<td>
+				{{has-feature feature=field.updateable}}
+			</td>
+		</tr>
+	{{/each}}
+</tbody>

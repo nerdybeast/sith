@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import { computed } from '@ember/object';
 
 export default DS.Model.extend({
 	actionOverrides: DS.attr(),
@@ -25,7 +26,7 @@ export default DS.Model.extend({
 	name: DS.attr('string'),
 	namedLayoutInfos: DS.attr(),
 	queryable: DS.attr('boolean'),
-	recordTypeInfos: DS.attr(),
+	recordTypes: DS.attr(),
 	replicateable: DS.attr('boolean'),
 	retrieveable: DS.attr('boolean'),
 	searchable: DS.attr('boolean'),
@@ -34,5 +35,28 @@ export default DS.Model.extend({
 	undeletable: DS.attr('boolean'),
 	updateable: DS.attr('boolean'),
 	urls: DS.attr(),
-	isTooling: DS.attr('boolean')
+	isTooling: DS.attr('boolean'),
+
+	modifiedFields: computed('fields.[]', function () {
+
+		const fields = this.get('fields');
+
+		return fields.map(field => {
+
+			const newPicklistValues = field.picklistValues.map(option => {
+
+				if(!option.active) option.label += ' (inactive)';
+				if(option.defaultValue) option.label += ' (default)';
+
+				//Little hack to make sure our default option shows up first in the picklist.
+				option.order = option.defaultValue ? 0 : 1;
+
+				return option;
+			});
+
+			field.picklistValues = newPicklistValues.sortBy('order', 'label');
+
+			return field;
+		});
+	})
 });

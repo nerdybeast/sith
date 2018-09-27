@@ -4,29 +4,6 @@
 		{{sobject-list sobjects=model.sobjects onClick=(action "goToSobjectView") onSearch=(action "searchForMetadata")}}
 	</div>
 
-	{{#unless loadingSobjectFields}}
-
-		{{#if activeSobject}}
-
-			<div class="column is-narrow">
-				{{sobject-fields-list fields=activeSobject.fields onClick=(action "setActiveSobjectField")}}
-			</div>
-			
-			<div class="column">
-				{{user-information-input
-					inputLabel="A select query with all fields included"
-					inputValue=selectStarQuery
-					onCopy=(action "selectStarCopy")
-					onCopyError=(action "selectStarCopyError")
-				}}
-			</div>
-
-		{{/if}}
-
-	{{else}}
-		Loading field names...
-	{{/unless}}
-
 </div>
 
 {{outlet}}

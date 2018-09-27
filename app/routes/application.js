@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Route.extend({
 
 	auth: service('auth'),
+	basicAjax: service('basic-ajax'),
 
 	async beforeModel() {
 
@@ -11,6 +12,10 @@ export default Route.extend({
 		if(this.get('auth.isAuthenticated') && !sessionStorage.getItem('profile')) {
 			await this.get('auth').getProfile();
 		}
+	},
+
+	afterModel() {
+		this.get('basicAjax').pingBackend();
 	},
 
 	actions: {
