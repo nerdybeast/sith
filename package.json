@@ -44,7 +44,7 @@
     "ember-cli-inject-live-reload": "^1.4.1",
     "ember-cli-moment-shim": "^3.5.3",
     "ember-cli-qunit": "^4.1.1",
-    "ember-cli-sass": "^6.2.0",
+    "ember-cli-sass": "^10.0.1",
     "ember-cli-shims": "^1.2.0",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^2.0.0",
@@ -58,9 +58,10 @@
     "ember-power-select": "^2.0.0",
     "ember-resolver": "^4.0.0",
     "ember-source": "~3.1.0",
-    "ember-websockets": "^7.1.1",
+    "ember-websockets": "^7.2.0",
     "ember-welcome-page": "^3.0.0",
     "eslint-plugin-ember": "^5.0.0",
-    "loader.js": "^4.2.3"
+    "loader.js": "^4.2.3",
+    "sass": "^1.21.0"
   }
 }
