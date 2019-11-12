@@ -1,3 +1,4 @@
+import { notEmpty, mapBy } from '@ember/object/computed';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
@@ -45,13 +46,13 @@ export default Component.extend({
 		return this.get('traceFlags').find(traceFlag => traceFlag.get('isNew'));
 	}),
 
-	isCreatingNewTraceFlag: computed.notEmpty('newTraceFlag'),
+	isCreatingNewTraceFlag: notEmpty('newTraceFlag'),
 
 	newDebugLevel: computed('newDebugLevelName', function() {
 		return this.get('debugLevels').find(debugLevel => debugLevel.get('developerName') === this.get('newDebugLevelName'));
 	}),
 
-	debugLevelOptions: computed.mapBy('debugLevels', 'developerName'),
+	debugLevelOptions: mapBy('debugLevels', 'developerName'),
 
 	actionErrorNotifier(title, error) {
 

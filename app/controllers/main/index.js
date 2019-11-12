@@ -1,4 +1,6 @@
-import Controller, { inject as injectController } from '@ember/controller';
+import Controller, {
+  inject as injectController
+} from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
