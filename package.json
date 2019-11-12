@@ -12,7 +12,6 @@
   },
   "scripts": {
     "build": "ember build",
-    "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "start": "node --inspect=9229 node_modules/ember-cli/bin/ember serve",
     "test": "ember test"
@@ -47,7 +46,6 @@
     "ember-cli-moment-shim": "^3.5.3",
     "ember-cli-sass": "^10.0.1",
     "ember-cli-sri": "^2.1.1",
-    "ember-cli-template-lint": "^1.0.0-beta.3",
     "ember-cli-uglify": "^3.0.0",
     "ember-concurrency": "^0.8.19",
     "ember-data": "~3.13.0",
