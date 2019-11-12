@@ -7,11 +7,10 @@ import { Promise } from 'rsvp';
 import { isPresent } from '@ember/utils';
 
 export default Service.extend({
+    ajax: service('ajax'),
+    store: service('store'),
 
-	ajax: service('ajax'),
-	store: service('store'),
-
-	auth0: computed(function() {
+    auth0: computed(function() {
 		
 		//The "auth0" var is global, it was imported in ember-cli-build.js
 		return new auth0.WebAuth({
@@ -25,11 +24,11 @@ export default Service.extend({
 
 	}),
 
-	login() {
+    login() {
 		this.auth0.authorize();
 	},
 
-	handleAuthentication() {
+    handleAuthentication() {
 		return new Promise((resolve, reject) => {
 			this.auth0.parseHash((error, authResult) => {
 				
@@ -54,12 +53,11 @@ export default Service.extend({
 		});
 	},
 
-	//Volatile property meaning the value won't be cached, fresh data pull every time.
-	isAuthenticated: computed(function() {
+    get isAuthenticated() {
 		return isPresent(this.getSession().access_token) && !this.isExpired();
-	}).volatile(),
+	},
 
-	getSession() {
+    getSession() {
 		return {
 			access_token: localStorage.getItem('access_token'),
 			id_token: localStorage.getItem('id_token'),
@@ -67,7 +65,7 @@ export default Service.extend({
 		};
 	},
 
-	setSession(authResult) {
+    setSession(authResult) {
 		// Set the time that the access token will expire at
 		let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
 		localStorage.setItem('access_token', authResult.accessToken);
@@ -75,25 +73,25 @@ export default Service.extend({
 		localStorage.setItem('expires_at', expiresAt);
 	},
 
-	logout() {
+    logout() {
 		// Clear access token and ID token from local storage
 		localStorage.removeItem('access_token');
 		localStorage.removeItem('id_token');
 		localStorage.removeItem('expires_at');
 		sessionStorage.removeItem('profile');
 	},
-	
-	isExpired() {
+
+    isExpired() {
 		// Check whether the current time is past the access token's expiry time
 		let expiresAt = this.getSession().expires_at;
 		return new Date().getTime() >= expiresAt;
 	},
 
-	setProfile(profile) {
+    setProfile(profile) {
 		sessionStorage.setItem('profile', JSON.stringify(profile));
 	},
 
-	async getProfile() {
+    async getProfile() {
 
 		const profileAsString = sessionStorage.getItem('profile');
 		if(profileAsString) return JSON.parse(profileAsString);
@@ -108,7 +106,7 @@ export default Service.extend({
 		return profile;
 	},
 
-	userInformation: computed(function() {
+    get userInformation() {
 		
 		const profile = JSON.parse(sessionStorage.getItem('profile'));
 		const customDomain = profile.urls.custom_domain;
@@ -129,9 +127,9 @@ export default Service.extend({
 			orgVersion
 		};
 
-	}).volatile(),
+	},
 
-	requestHeaders: computed(function() {
+    get requestHeaders() {
 
 		const { sessionId, instanceUrl, organizationId, userId, orgVersion } = this.userInformation;
 
@@ -142,5 +140,5 @@ export default Service.extend({
 			'user-id': userId,
 			'org-version': orgVersion
 		};
-	}).volatile()
+	}
 });
