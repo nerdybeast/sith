@@ -9,7 +9,7 @@ export default Component.extend({
 
 		try {
 
-			yield this.get('onSearch')(searchTerm);
+			yield this.onSearch(searchTerm);
 
 		} catch(error) {
 			console.error(error);

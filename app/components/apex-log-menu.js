@@ -9,7 +9,7 @@ export default Component.extend({
 	auth: service('auth'),
 
 	socket() {
-		return this.get('io').socketFor(`${ENV.SITH_API_DOMAIN}/APEX_LOGS`);
+		return this.io.socketFor(`${ENV.SITH_API_DOMAIN}/APEX_LOGS`);
 	},
 
 	init() {
@@ -28,7 +28,7 @@ export default Component.extend({
 	},
 
 	apexLogUpdate(apexLogs) {
-		this.get('onSocketUpdate')(apexLogs);
+		this.onSocketUpdate(apexLogs);
 	},
 
 	didInsertElement() {
@@ -43,7 +43,7 @@ export default Component.extend({
 	actions: {
 
 		setAsActiveLog(apexLogId) {
-			this.get('onClick')(apexLogId);
+			this.onClick(apexLogId);
 		}
 
 	}

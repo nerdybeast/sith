@@ -19,20 +19,20 @@ export default Component.extend(ValidateMixin, {
 	isApiDataType: equal('controllingField', 'apiDataType'),
 
 	fieldType: computed('field', 'isApiDataType', function() {
-		const { field, isApiDataType } = this.getProperties('field', 'isApiDataType');
+		const { field, isApiDataType } = this;
 		return isApiDataType ? field.apiDataType : field.metadata.type;
 	}),
 
 	isLookup: computed('fieldType', function() {
-		return ['MasterDetail', 'Lookup'].includes(this.get('fieldType'));
+		return ['MasterDetail', 'Lookup'].includes(this.fieldType);
 	}),
 
 	isPicklist: computed('fieldType', function() {
-		return ['Picklist', 'MultiselectPicklist'].includes(this.get('fieldType'));
+		return ['Picklist', 'MultiselectPicklist'].includes(this.fieldType);
 	}),
 
 	isNumber: computed('fieldType', function() {
-		return ['double', 'decimal', 'Number', 'Currency'].includes(this.get('fieldType'));
+		return ['double', 'decimal', 'Number', 'Currency'].includes(this.fieldType);
 	}),
 
 	referenceTo: computed('field.referenceTo.[]', function() {

@@ -10,7 +10,7 @@ export default Controller.extend({
 
 		async searchForMetadata(searchTerm) {
 
-			const result = await this.get('store').query('sobject-metadata', {
+			const result = await this.store.query('sobject-metadata', {
 				q: searchTerm
 			});
 

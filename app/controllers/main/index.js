@@ -1,4 +1,6 @@
-import Controller, { inject as injectController } from '@ember/controller';
+import Controller, {
+  inject as injectController
+} from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
@@ -7,12 +9,12 @@ export default Controller.extend({
 	auth: service('auth'),
 
 	updateTraceFlagsFromStore() {
-		this.get('mainController').set('model.traceFlags', this.get('store').peekAll('trace-flag'));
+		this.mainController.set('model.traceFlags', this.store.peekAll('trace-flag'));
 	},
 
 	purgeTraceFlagsNoLongerInSalesforce(remoteTraceFlags) {
 
-		const store = this.get('store');
+		const store = this.store;
 
 		//Filter by "isNew" to prevent deleting a new trace flag the user is currently creating.
 		const localTraceFlags = store.peekAll('trace-flag').filterBy('isNew', false);
@@ -34,7 +36,7 @@ export default Controller.extend({
 			
 			try {
 			
-				const store = this.get('store');
+				const store = this.store;
 
 				//Using "query" instead of "findAll" because findAll returns a mix of what was returned from the server as well as 
 				//what's still stored locally in ember data. Here we need to know exactly what came back from the server so that we 
@@ -51,7 +53,7 @@ export default Controller.extend({
 
 		async createNewTraceFlag() {
 			
-			this.get('store').createRecord('trace-flag', {
+			this.store.createRecord('trace-flag', {
 				logType: 'USER_DEBUG',
 				tracedEntityId: this.get('auth.userInformation.userId')
 			});
@@ -60,7 +62,7 @@ export default Controller.extend({
 		},
 
 		async saveNewTraceFlag(traceFlag) {
-			const debugLevel = this.get('store').peekRecord('debug-level', traceFlag.get('debugLevelId'));
+			const debugLevel = this.store.peekRecord('debug-level', traceFlag.get('debugLevelId'));
 			traceFlag.set('debugLevel', debugLevel);
 			await traceFlag.save();
 			this.updateTraceFlagsFromStore();
@@ -80,7 +82,7 @@ export default Controller.extend({
 				return;
 			}
 
-			const store = this.get('store');
+			const store = this.store;
 			store.push(traceFlags);
 
 			const traceFlagsInSalesforce = store.peekAll('trace-flag').filter(x => {
@@ -101,7 +103,7 @@ export default Controller.extend({
 		},
 
 		logout() {
-			this.get('auth').logout();
+			this.auth.logout();
 			this.transitionToRoute('welcome');
 		}
 	}

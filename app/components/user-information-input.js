@@ -16,6 +16,6 @@ export default Component.extend({
 	},
 
 	willDestroyElement() {
-		this.get('tooltips').destroyAll();
+		this.tooltips.destroyAll();
 	}
 });

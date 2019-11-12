@@ -17,7 +17,7 @@ export default DS.JSONAPIAdapter.extend({
 		const { sessionId, instanceUrl, organizationId, userId } = this.get('auth.userInformation');
 		
 		//TODO: this needs to be done better, somehow...
-		const orgVersion = this.get('store').peekAll('org-version').sortBy('id').get('lastObject.version');
+		const orgVersion = this.store.peekAll('org-version').sortBy('id').get('lastObject.version');
 
 		return { 
 			'salesforce-session-token': sessionId,

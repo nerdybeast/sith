@@ -32,17 +32,17 @@ export default Component.extend({
 	attributeBindings: ['title'],
 
 	iconToDisplay: computed('icon', 'animationIcon', 'clickTriggered', function() {
-		const { icon, animationIcon, clickTriggered } = this.getProperties('icon', 'animationIcon', 'clickTriggered');
+		const { icon, animationIcon, clickTriggered } = this;
 		if(!animationIcon) return icon;
 		return clickTriggered ? animationIcon : icon;
 	}),
 
 	iconClass: computed('iconToDisplay', function() {
-		return `fa fa-${this.get('iconToDisplay')}`;
+		return `fa fa-${this.iconToDisplay}`;
 	}),
 
 	colorClassToDisplay: computed('colorClass', 'animationColorClass', 'clickTriggered', function() {
-		const { colorClass, animationColorClass, clickTriggered } = this.getProperties('colorClass', 'animationColorClass', 'clickTriggered');
+		const { colorClass, animationColorClass, clickTriggered } = this;
 		if(!colorClass && !animationColorClass) return '';
 		if(!animationColorClass) return `has-text-${colorClass}`;
 		const result = clickTriggered ? animationColorClass : colorClass;
@@ -50,16 +50,16 @@ export default Component.extend({
 	}),
 
 	shouldAnimate: computed('animateOnAction', 'clickTriggered', function() {
-		const isAnimated = this.get('animateOnAction') && this.get('clickTriggered');
-		return isAnimated ? this.get('animationSpeedClass') : '';
+		const isAnimated = this.animateOnAction && this.clickTriggered;
+		return isAnimated ? this.animationSpeedClass : '';
 	}),
 
 	didInsertElement() {
 		
-		if(this.get('title')) {
+		if(this.title) {
 
 			//Gives all html elements with a "title" attribute a tooltip.
-			const tooltip = tippy(`#${this.get('elementId')}`, {
+			const tooltip = tippy(`#${this.elementId}`, {
 				arrow: true,
 				duration: ['150'],
 				theme: 'bulma'
@@ -70,7 +70,7 @@ export default Component.extend({
 	},
 
 	willDestroyElement() {
-		const tooltip = this.get('tooltip');
+		const tooltip = this.tooltip;
 		if(tooltip) tooltip.destroyAll();
 	},
 
@@ -80,12 +80,12 @@ export default Component.extend({
 		this.set('clickTriggered', true);
 
 		try {
-			await this.get('onClick')();
+			await this.onClick();
 		} catch (error) {
 			//
 		}
 		
-		if(!this.get('isDestroyed')) {
+		if(!this.isDestroyed) {
 			this.set('clickTriggered', false);
 		}
 	}

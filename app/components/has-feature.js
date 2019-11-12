@@ -12,10 +12,10 @@ export default Component.extend(ValidateMixin, {
 	},
 
 	icon: computed('feature', function() {
-		return this.get('feature') ? 'check' : 'times';
+		return this.feature ? 'check' : 'times';
 	}),
 
 	colorClass: computed('feature', function() {
-		return this.get('feature') ? 'success' : 'danger';
+		return this.feature ? 'success' : 'danger';
 	})
 });

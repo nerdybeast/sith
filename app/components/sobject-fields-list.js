@@ -17,12 +17,12 @@ export default Component.extend(ValidateMixin, {
 	},
 
 	sortedFields: computed('addedFieldMetaTagConfig', function() {
-		return this.get('addedFieldMetaTagConfig').sortBy('name');
+		return this.addedFieldMetaTagConfig.sortBy('name');
 	}),
 
 	addedFieldMetaTagConfig: computed('fields.[]', function() {
 
-		const fields = this.get('fields') || [];
+		const fields = this.fields || [];
 
 		fields.forEach(field => {
 

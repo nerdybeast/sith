@@ -8,7 +8,7 @@ export default Controller.extend({
 	actions: {
 		
 		login() {
-			this.get('auth').login();
+			this.auth.login();
 		},
 
 		enterSite() {

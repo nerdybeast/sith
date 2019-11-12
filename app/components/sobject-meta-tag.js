@@ -10,7 +10,7 @@ export default Component.extend(ValidateMixin, {
 
 	tagProperties: computed('sobject', function() {
 		
-		const sobject = this.get('sobject');
+		const sobject = this.sobject;
 		
 		if(sobject.isTooling) {
 			return {
@@ -44,7 +44,7 @@ export default Component.extend(ValidateMixin, {
 	}),
 
 	title: computed('tagProperties', function() {
-		return this.get('tagProperties').title;
+		return this.tagProperties.title;
 	}),
 
 	init() {

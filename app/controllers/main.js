@@ -29,13 +29,13 @@ export default Controller.extend({
 
 	willDestroy() {
 		this._super(...arguments);
-		clearInterval(this.get('traceFlagTimer'));
+		clearInterval(this.traceFlagTimer);
 	},
 
 	actions: {
 
 		logout() {
-			this.get('auth').logout();
+			this.auth.logout();
 			this.transitionToRoute('welcome');
 		}
 
