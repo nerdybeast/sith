@@ -8,11 +8,11 @@ export default Component.extend({
 	actions: {
 
 		onCopy(item) {
-			this.get('toast').success(`${item} copied to clipboard`);
+			this.toast.success(`${item} copied to clipboard`);
 		},
 
 		onCopyError(item) {
-			this.get('toast').error(`${item} failed to copy`);
+			this.toast.error(`${item} failed to copy`);
 		}
 	}
 });

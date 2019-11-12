@@ -6,7 +6,7 @@ export default Route.extend({
 	async model() {
 		
 		const [ logs ] = await all([
-			this.get('store').findAll('apex-log')
+			this.store.findAll('apex-log')
 		]);
 
 		return { logs };

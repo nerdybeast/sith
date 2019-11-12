@@ -24,10 +24,10 @@ export default Component.extend(ValidateMixin, {
 
 	didInsertElement() {
 
-		if(!isEmpty(this.get('title'))) {
+		if(!isEmpty(this.title)) {
 
 			//Gives all html elements with a "title" attribute a tooltip.
-			const tooltip = tippy(`#${this.get('elementId')}`, {
+			const tooltip = tippy(`#${this.elementId}`, {
 				arrow: true,
 				duration: ['150'],
 				theme: 'bulma'
@@ -38,7 +38,7 @@ export default Component.extend(ValidateMixin, {
 	},
 
 	willDestroyElement() {
-		const tooltip = this.get('tooltip');
+		const tooltip = this.tooltip;
 		if(tooltip) tooltip.destroyAll();
 	}
 });

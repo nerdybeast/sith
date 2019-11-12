@@ -7,8 +7,8 @@ export default Component.extend({
 	actions: {
 		async clicked(numberOfHours) {
 			this.set(`hourButtonLoading${numberOfHours}`, true);
-			await this.get('onClick')(this.get('traceFlag'), numberOfHours);
-			if(this.get('isDestroyed')) return;
+			await this.onClick(this.traceFlag, numberOfHours);
+			if(this.isDestroyed) return;
 			this.set(`hourButtonLoading${numberOfHours}`, false);
 		}
 	}

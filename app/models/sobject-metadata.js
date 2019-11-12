@@ -39,7 +39,7 @@ export default DS.Model.extend({
 
 	modifiedFields: computed('fields.[]', function () {
 
-		const fields = this.get('fields');
+		const fields = this.fields;
 
 		return fields.map(field => {
 

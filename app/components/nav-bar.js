@@ -13,7 +13,7 @@ export default Component.extend({
 			this.set('showLogoutModal', false);
 		},
 		logout() {
-			this.get('onLogout')();
+			this.onLogout();
 		},
 		toggleUserDropdown() {
 			this.toggleProperty('showUserDropdown');

@@ -19,11 +19,11 @@ export default ApplicationAdapter.extend({
 	},
 
 	urlForFindAll() {
-		return `${this.get('host')}/${this.get('namespace')}/global`;
+		return `${this.host}/${this.namespace}/global`;
 	},
 
 	urlForQuery(query/*, modelName*/) {
-		return `${this.get('host')}/${this.get('namespace')}/global`;
+		return `${this.host}/${this.namespace}/global`;
 	}
 
 });

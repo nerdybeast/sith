@@ -7,23 +7,23 @@ export default Service.extend({
 	auth: service('auth'),
 
 	pingBackend() {
-		this.get('ajax').request(ENV.SITH_API_DOMAIN);
+		this.ajax.request(ENV.SITH_API_DOMAIN);
 	},
 
 	async getLogTypes() {
-		const logTypes = await this.get('ajax').request(`${ENV.SITH_API_DOMAIN}/api/metadata/log-types`);
+		const logTypes = await this.ajax.request(`${ENV.SITH_API_DOMAIN}/api/metadata/log-types`);
 		return logTypes;
 	},
 
 	async describeSobject(sobjectName) {
-		return await this.get('ajax').request(`${ENV.SITH_API_DOMAIN}/api/metadata/describe/${sobjectName}`);
+		return await this.ajax.request(`${ENV.SITH_API_DOMAIN}/api/metadata/describe/${sobjectName}`);
 	},
 
 	async searchByIdentifier(identifier) {
 		
 		const headers = this.get('auth.requestHeaders');
 
-		return await this.get('ajax').request(`${ENV.SITH_API_DOMAIN}/api/metadata/search/identifier?q=${identifier}`, {
+		return await this.ajax.request(`${ENV.SITH_API_DOMAIN}/api/metadata/search/identifier?q=${identifier}`, {
 			headers
 		});
 	}

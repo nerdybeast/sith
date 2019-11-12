@@ -30,7 +30,7 @@ export default Component.extend({
 		yield timeout(500);
 
 		try {
-			searchResults = yield this.get('basicAjax').searchByIdentifier(searchTerm);
+			searchResults = yield this.basicAjax.searchByIdentifier(searchTerm);
 		} catch (error) {
 			this.set('noResultsMessage', error.payload.errors[0].message);
 		}

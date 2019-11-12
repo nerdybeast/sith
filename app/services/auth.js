@@ -26,12 +26,12 @@ export default Service.extend({
 	}),
 
 	login() {
-		this.get('auth0').authorize();
+		this.auth0.authorize();
 	},
 
 	handleAuthentication() {
 		return new Promise((resolve, reject) => {
-			this.get('auth0').parseHash((error, authResult) => {
+			this.auth0.parseHash((error, authResult) => {
 				
 				//Will be true if the current url does not have a hash to parse
 				if(!error && !authResult) {
@@ -100,7 +100,7 @@ export default Service.extend({
 
 		const token = this.getSession().id_token;
 
-		const profile = await this.get('ajax').post(`${ENV.SITH_API_DOMAIN}/api/user/profile`, {
+		const profile = await this.ajax.post(`${ENV.SITH_API_DOMAIN}/api/user/profile`, {
 			data: { token }
 		});
 
@@ -118,7 +118,7 @@ export default Service.extend({
 		const userId = profile.identities[0].user_id;
 		const instanceUrl = customDomain || enterprise.substring(0, enterprise.indexOf('/services'));
 		const organizationId = profile.organization_id;
-		const orgVersion = this.get('store').peekAll('org-version').sortBy('id').get('lastObject.version');
+		const orgVersion = this.store.peekAll('org-version').sortBy('id').get('lastObject.version');
 
 		return {
 			sessionId,
@@ -133,7 +133,7 @@ export default Service.extend({
 
 	requestHeaders: computed(function() {
 
-		const { sessionId, instanceUrl, organizationId, userId, orgVersion } = this.get('userInformation');
+		const { sessionId, instanceUrl, organizationId, userId, orgVersion } = this.userInformation;
 
 		return { 
 			'salesforce-session-token': sessionId,

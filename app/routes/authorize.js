@@ -7,7 +7,7 @@ export default Route.extend({
 
 	async beforeModel() {
 
-		const auth = this.get('auth');
+		const auth = this.auth;
 
 		await auth.handleAuthentication();
 

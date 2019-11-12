@@ -10,12 +10,12 @@ export default Route.extend({
 
 		//Can happen if the user closes the site which clears sessionStorage even though they are still authenticated.
 		if(this.get('auth.isAuthenticated') && !sessionStorage.getItem('profile')) {
-			await this.get('auth').getProfile();
+			await this.auth.getProfile();
 		}
 	},
 
 	afterModel() {
-		this.get('basicAjax').pingBackend();
+		this.basicAjax.pingBackend();
 	},
 
 	actions: {
@@ -24,7 +24,7 @@ export default Route.extend({
 			const mainError = error.errors[0];
 
 			if(mainError.statusCode === 401) {
-				this.get('auth').logout();
+				this.auth.logout();
 				this.replaceWith('welcome');
 			}
 		}

@@ -17,7 +17,7 @@ export default Component.extend({
 	debugLevels: null,
 
 	socket() {
-		return this.get('io').socketFor(`${ENV.SITH_API_DOMAIN}/TRACE_FLAGS`);
+		return this.io.socketFor(`${ENV.SITH_API_DOMAIN}/TRACE_FLAGS`);
 	},
 
 	init() {
@@ -36,27 +36,27 @@ export default Component.extend({
 	},
 
 	traceFlagsUpdate(traceFlags) {
-		this.get('onSocketUpdate')(traceFlags);
-		this.get('toast').info('Trace Flags synced with Salesforce');
+		this.onSocketUpdate(traceFlags);
+		this.toast.info('Trace Flags synced with Salesforce');
 	},
 
 	newDebugLevelName: null,
 
 	newTraceFlag: computed('traceFlags.@each.isNew', function() {
-		return this.get('traceFlags').find(traceFlag => traceFlag.get('isNew'));
+		return this.traceFlags.find(traceFlag => traceFlag.get('isNew'));
 	}),
 
 	isCreatingNewTraceFlag: notEmpty('newTraceFlag'),
 
 	newDebugLevel: computed('newDebugLevelName', function() {
-		return this.get('debugLevels').find(debugLevel => debugLevel.get('developerName') === this.get('newDebugLevelName'));
+		return this.debugLevels.find(debugLevel => debugLevel.get('developerName') === this.newDebugLevelName);
 	}),
 
 	debugLevelOptions: mapBy('debugLevels', 'developerName'),
 
 	actionErrorNotifier(title, error) {
 
-		const toast = this.get('toast');
+		const toast = this.toast;
 
 		//if "error" is an ember data adapter error (ex: 401 returned from the server) then it will
 		//have a property "errors" that is an array of errors, if not default to whatever "error" currently is.
@@ -65,7 +65,7 @@ export default Component.extend({
 		errors.forEach(x => toast.error(x.message, title));
 
 		if(errors.find(x => x.statusCode === 401)) {
-			this.get('logout')();
+			this.logout();
 		}
 	},
 
@@ -73,16 +73,16 @@ export default Component.extend({
 		
 		async refresh() {
 			try {
-				await this.get('onRefresh')();
-				this.get('toast').success('Trace Flags Refreshed');
+				await this.onRefresh();
+				this.toast.success('Trace Flags Refreshed');
 			} catch (error) {
-				this.get('toast').error(error);
+				this.toast.error(error);
 			}
 		},
 
 		async updateExpiration(traceFlag, numberOfHours) {
 			
-			const toast = this.get('toast');
+			const toast = this.toast;
 
 			try {
 				
@@ -91,7 +91,7 @@ export default Component.extend({
 					expirationDate: moment().add(numberOfHours, 'hours').format()
 				});
 
-				await this.get('onUpdate')(traceFlag);
+				await this.onUpdate(traceFlag);
 				toast.success('Trace Flag Updated');
 
 			} catch (error) {
@@ -103,12 +103,12 @@ export default Component.extend({
 		},
 
 		async add() {
-			this.get('onNewTraceFlag')();
+			this.onNewTraceFlag();
 		},
 
 		async saveNewTraceFlag(traceFlag, numberOfHours) {
 			
-			const toast = this.get('toast');
+			const toast = this.toast;
 
 			try {
 				
@@ -118,7 +118,7 @@ export default Component.extend({
 					debugLevelId: this.get('newDebugLevel.id')
 				});
 	
-				await this.get('onSaveNewTraceFlag')(traceFlag);
+				await this.onSaveNewTraceFlag(traceFlag);
 				toast.success('Trace Flag Created');
 
 			} catch (error) {
@@ -129,10 +129,10 @@ export default Component.extend({
 
 		async delete(traceFlag) {
 			
-			const toast = this.get('toast');
+			const toast = this.toast;
 
 			try {
-				await this.get('onDelete')(traceFlag);
+				await this.onDelete(traceFlag);
 				toast.success('Trace Flag Deleted');
 			} catch (error) {
 				this.actionErrorNotifier('Trace Flag Deletion Failed', error);
@@ -141,7 +141,7 @@ export default Component.extend({
 		},
 
 		async cancel(traceFlag) {
-			await this.get('onCancel')(traceFlag);
+			await this.onCancel(traceFlag);
 		},
 
 		setNewDebugLevelName(debugLevelName) {

@@ -25,7 +25,7 @@ export default Controller.extend({
 
 		updateApexLogsFromSocket(rawApexLogResponse) {
 
-			const store = this.get('store');
+			const store = this.store;
 			const localLogs = store.peekAll('apex-log').filter(log => !log.get('isActive'));
 
 			const remoteLogIds = rawApexLogResponse.data.map(x => x.id);
@@ -36,7 +36,7 @@ export default Controller.extend({
 				}
 			});
 
-			const apexLogs = this.get('store').push(rawApexLogResponse);
+			const apexLogs = this.store.push(rawApexLogResponse);
 			this.set('model.logs', apexLogs);
 		}
 	}
